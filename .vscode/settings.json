@@ -1,0 +1,10 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "editor.fontSize": 18,
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "editor.lineNumbers": "on",
+     "editor.parameterHints": true,
+     "editor.autoClosingBrackets": true,
+     "editor.formatOnType": false,
+     "editor.selectionHighlight": true
+}
