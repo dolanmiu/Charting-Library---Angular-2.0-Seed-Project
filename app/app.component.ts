@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {ChartUI} from './ui.component'
+import {ChartUI} from './ui_component/ui.component'
 
 @Component({
     selector: 'my-app',

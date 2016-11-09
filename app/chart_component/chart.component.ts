@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core'
-import {ChartService} from './chart.service'
+import {ChartService} from '../chart_service/chart.service'
 
 declare var STXChart: any;
 declare var STX: any;
@@ -7,15 +7,8 @@ declare var $$$: any;
 
 @Component({
     selector: 'chart',
-    styles: [`
-    #chartContainer{
-	margin:0 auto;
-	width:800px;
-	height:500px;
-	position:relative;
-    }
-`],
-    template: '<div id="chartContainer"></div>',
+    styleUrls: ['app/chart_component/chart.component.css'],
+    templateUrl: 'app/chart_component/chart.component.html',
     providers: [ChartService]
 })
 export class ChartComponent {

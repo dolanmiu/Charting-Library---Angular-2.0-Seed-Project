@@ -1,17 +1,11 @@
 import {Component, ViewChild} from 'angular2/core'
-import {ChartComponent} from './chart.component'
+import {ChartComponent} from '../chart_component/chart.component'
 
 declare var STX: any;
 
 @Component({
     selector: 'chart-ui',
-    template: `
-<div>
-<input [(ngModel)]="symbolInput">
-<button (click)=changeSymbol()>Change Symbol</button>
-</div>
-<chart></chart>
-    `,
+    templateUrl: 'app/ui_component/ui.component.html',
     directives: [ChartComponent] 
 })
 

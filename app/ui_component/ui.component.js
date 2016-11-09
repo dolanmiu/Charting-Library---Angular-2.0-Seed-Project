@@ -1,4 +1,4 @@
-System.register(['angular2/core', './chart.component'], function(exports_1, context_1) {
+System.register(['angular2/core', '../chart_component/chart.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -35,7 +35,7 @@ System.register(['angular2/core', './chart.component'], function(exports_1, cont
                 ChartUI = __decorate([
                     core_1.Component({
                         selector: 'chart-ui',
-                        template: "\n<div>\n<input [(ngModel)]=\"symbolInput\">\n<button (click)=changeSymbol()>Change Symbol</button>\n</div>\n<chart></chart>\n    ",
+                        templateUrl: 'app/ui_component/ui.component.html',
                         directives: [chart_component_1.ChartComponent]
                     }), 
                     __metadata('design:paramtypes', [])

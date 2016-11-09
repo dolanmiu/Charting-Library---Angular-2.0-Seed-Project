@@ -1,4 +1,4 @@
-System.register(['angular2/core', './chart.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../chart_service/chart.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -35,8 +35,8 @@ System.register(['angular2/core', './chart.service'], function(exports_1, contex
                 ChartComponent = __decorate([
                     core_1.Component({
                         selector: 'chart',
-                        styles: ["\n    #chartContainer{\n\tmargin:0 auto;\n\twidth:800px;\n\theight:500px;\n\tposition:relative;\n    }\n"],
-                        template: '<div id="chartContainer"></div>',
+                        styleUrls: ['app/chart_component/chart.component.css'],
+                        templateUrl: 'app/chart_component/chart.component.html',
                         providers: [chart_service_1.ChartService]
                     }), 
                     __metadata('design:paramtypes', [chart_service_1.ChartService])
