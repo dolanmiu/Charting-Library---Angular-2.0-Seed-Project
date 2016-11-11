@@ -1,0 +1,6 @@
+<div id="periodicitySelect">
+	
+	<div class="menu-hover">
+		<div class="option" *ngFor="let #periodicity of periodicityOptions"><span>{{periodicity.label}}</span></div>
+	</div>
+</div>

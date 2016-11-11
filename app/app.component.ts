@@ -3,7 +3,7 @@ import {ChartUI} from './ui_component/ui.component'
 
 @Component({
     selector: 'my-app',
-    template: `<h1>ChartIQ Angular 2 Example</h1>
+    template: `
     <chart-ui></chart-ui>
     `,
     directives: [ChartUI]

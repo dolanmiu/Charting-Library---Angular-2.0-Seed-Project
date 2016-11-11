@@ -27,7 +27,7 @@ System.register(['angular2/core', './ui_component/ui.component'], function(expor
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "<h1>ChartIQ Angular 2 Example</h1>\n    <chart-ui></chart-ui>\n    ",
+                        template: "\n    <chart-ui></chart-ui>\n    ",
                         directives: [ui_component_1.ChartUI]
                     }), 
                     __metadata('design:paramtypes', [])
