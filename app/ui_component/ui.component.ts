@@ -1,5 +1,6 @@
-import {Component, ViewChild} from 'angular2/core'
+import {Component, ViewChild, AfterViewChecked, ChangeDetectionStrategy, NgZone, Input} from 'angular2/core'
 import {ChartComponent} from '../chart_component/chart.component'
+import {PeriodicityPipe} from '../pipes/periodicity_pipe'
 
 declare var STX: any;
 
@@ -7,14 +8,48 @@ declare var STX: any;
     selector: 'chart-ui',
 	styleUrls:['app/ui_component/ui.component.css'],
     templateUrl: 'app/ui_component/ui.component.html',
-    directives: [ChartComponent] 
+	pipes: [PeriodicityPipe],
+	directives:[ChartComponent],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class ChartUI {
-    @ViewChild(ChartComponent) chartComponent: ChartComponent;
-	symbolInput: string;
+export class ChartUI implements AfterViewChecked {
+    @ViewChild(ChartComponent) chartComponent:ChartComponent;
+	symbolInput:string;
+	public chartLayout:any;
+	periodicity:string;
 
-    periodicityOptions: any[] = [
+	constructor(private zone: NgZone){
+		console.log(this.chartComponent);
+		//this.periodicity=this.chartComponent;
+	}
+
+	ngAfterViewChecked(){
+		this.chartLayout=this.getChartLayout();
+		//console.log(this.chartLayout);
+		//update the periodicity
+		for(let i in this.periodicityOptions){
+			if(this.periodicityOptions[i].interval==this.chartLayout.interval && this.periodicityOptions[i].period==this.chartLayout.periodicity){
+				this.zone.run(()=>{this.uiStateChange("periodicity",this.periodicityOptions[i]);});
+			}
+		}
+	}
+
+	uiStateChange(what, change){
+		if(what=="periodicity") this.zone.run(()=>{this.periodicity=change.label;});
+	}
+	changeSymbol() {
+		this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
+		this.symbolInput='';
+	}
+	changePeriodicity(period, interval){
+		this.chartComponent.chart.setPeriodicityV2(period,interval);
+	}
+	getChartLayout(){
+		return this.chartComponent.getLayout();
+	}
+
+    private periodicityOptions: Array<any> = [
 			{
 				period: 1,
 				interval: 1,
@@ -96,16 +131,5 @@ export class ChartUI {
 				label: '1 Mon',
 			}
     ];
-
-	selectedPeriodicityOption: any[];
-
-    changeSymbol() {
-        this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
-        this.symbolInput='';
-    }
-    changePeriodicity() {
-       this.chartComponent.chart.setPeriodicityV2(this.selectedPeriodicityOption[0].period, this.selectedPeriodicityOption[0].interval);
-	 
-    }
 
 }

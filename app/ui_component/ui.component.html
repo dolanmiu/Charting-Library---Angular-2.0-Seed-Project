@@ -1,15 +1,14 @@
-<h2 class="center">ChartIQ Angular2 Example</h2>
-<div class="chart-ui">
+<chart-ui #chartComponent>
 	<input [(ngModel)]="symbolInput">
 	<button (click)=changeSymbol()>Change Symbol</button>
     <strong>Periodicity:</strong>
-    <select [(ngModel)]="selectedPeriodicityOption" (ngModelChange)="changePeriodicity($event)" >
-    <option *ngFor="#period of periodicityOptions">
-        {{period.label}}
-    </option>
-    </select>
-</div>
-
-
-
-<chart></chart>
+	<div id="periodicitySelect">
+		<span>{{periodicity}}</span>
+		<div class="menu-hover">
+		    <div class="option" *ngFor="#period of periodicityOptions" (click)="changePeriodicity(period.period, period.interval)">
+		        {{period.label}}
+		    </div>
+		</div>
+	</div>
+	<chart></chart>
+</chart-ui>

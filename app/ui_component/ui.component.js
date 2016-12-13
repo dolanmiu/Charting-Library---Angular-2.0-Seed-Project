@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../chart_component/chart.component'], function(exports_1, context_1) {
+System.register(['angular2/core', '../chart_component/chart.component', '../pipes/periodicity_pipe'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, chart_component_1;
+    var core_1, chart_component_1, periodicity_pipe_1;
     var ChartUI;
     return {
         setters:[
@@ -19,10 +19,14 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
             },
             function (chart_component_1_1) {
                 chart_component_1 = chart_component_1_1;
+            },
+            function (periodicity_pipe_1_1) {
+                periodicity_pipe_1 = periodicity_pipe_1_1;
             }],
         execute: function() {
             ChartUI = (function () {
-                function ChartUI() {
+                function ChartUI(zone) {
+                    this.zone = zone;
                     this.periodicityOptions = [
                         {
                             period: 1,
@@ -105,13 +109,38 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                             label: '1 Mon',
                         }
                     ];
+                    console.log(this.chartComponent);
+                    //this.periodicity=this.chartComponent;
                 }
+                ChartUI.prototype.ngAfterViewChecked = function () {
+                    var _this = this;
+                    this.chartLayout = this.getChartLayout();
+                    //console.log(this.chartLayout);
+                    //update the periodicity
+                    var _loop_1 = function(i) {
+                        if (this_1.periodicityOptions[i].interval == this_1.chartLayout.interval && this_1.periodicityOptions[i].period == this_1.chartLayout.periodicity) {
+                            this_1.zone.run(function () { _this.uiStateChange("periodicity", _this.periodicityOptions[i]); });
+                        }
+                    };
+                    var this_1 = this;
+                    for (var i in this.periodicityOptions) {
+                        _loop_1(i);
+                    }
+                };
+                ChartUI.prototype.uiStateChange = function (what, change) {
+                    var _this = this;
+                    if (what == "periodicity")
+                        this.zone.run(function () { _this.periodicity = change.label; });
+                };
                 ChartUI.prototype.changeSymbol = function () {
                     this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
                     this.symbolInput = '';
                 };
-                ChartUI.prototype.changePeriodicity = function () {
-                    this.chartComponent.chart.setPeriodicityV2(this.selectedPeriodicityOption[0].period, this.selectedPeriodicityOption[0].interval);
+                ChartUI.prototype.changePeriodicity = function (period, interval) {
+                    this.chartComponent.chart.setPeriodicityV2(period, interval);
+                };
+                ChartUI.prototype.getChartLayout = function () {
+                    return this.chartComponent.getLayout();
                 };
                 __decorate([
                     core_1.ViewChild(chart_component_1.ChartComponent), 
@@ -122,9 +151,11 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                         selector: 'chart-ui',
                         styleUrls: ['app/ui_component/ui.component.css'],
                         templateUrl: 'app/ui_component/ui.component.html',
-                        directives: [chart_component_1.ChartComponent]
+                        pipes: [periodicity_pipe_1.PeriodicityPipe],
+                        directives: [chart_component_1.ChartComponent],
+                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [core_1.NgZone])
                 ], ChartUI);
                 return ChartUI;
             }());

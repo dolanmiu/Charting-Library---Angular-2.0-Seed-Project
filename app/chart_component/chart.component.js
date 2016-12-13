@@ -26,11 +26,14 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
                     this.chartService = chartService;
                 }
                 ;
-                ChartComponent.prototype.ngAfterViewInit = function () {
+                ChartComponent.prototype.ngOnInit = function () {
                     this.chart = new STXChart({ container: $$$("#chartContainer") });
                     this.chart.setPeriodicityV2(1, 5);
                     this.chartService.attachQuoteFeed(this.chart);
                     this.chart.newChart("IBM");
+                };
+                ChartComponent.prototype.getLayout = function () {
+                    return this.chart.layout;
                 };
                 ChartComponent = __decorate([
                     core_1.Component({

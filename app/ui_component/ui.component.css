@@ -7,3 +7,48 @@ text-align: center;
   margin-left: auto ;
   margin-right: auto ;
 }
+
+#periodicitySelect,
+#chartTypeSelect,
+#studySelect,
+#themeSelect{
+	padding:0;
+	list-style:none;
+	border:1px solid black;
+	min-width:100px;
+	display:inline-block;
+	font: 14px Arial;
+}
+#periodicitySelect .menu-hover .option,
+#chartTypeSelect .menu-hover .option,
+#studySelect .menu-hover .option,
+#themeSelect .menu-hover .option{
+	min-width:100px;
+	position:relative;
+	line-height:21px;
+	text-align:left;
+}
+#periodicitySelect .menu-hover .option:hover,
+#chartTypeSelect .menu-hover .option:hover,
+#studySelect .menu-hover .option:hover,
+#themeSelect .menu-hover .option:hover{
+	color:#fff;
+	background:#939393;
+}
+#periodicitySelect .menu-hover,
+#chartTypeSelect .menu-hover,
+#studySelect .menu-hover,
+#themeSelect .menu-hover{
+	position:absolute;
+	max-width:100px;
+	background:#f2f2f2;
+	display:none;
+	z-index:999;
+	left:inherit;
+}
+#periodicitySelect:hover .menu-hover,
+#chartTypeSelect:hover .menu-hover,
+#studySelect:hover .menu-hover,
+#themeSelect:hover .menu-hover{
+	display:block;
+}
