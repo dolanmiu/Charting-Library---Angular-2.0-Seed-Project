@@ -245,6 +245,10 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                     //update the ui
                     this.chartType = type.label;
                 };
+                ChartUI.prototype.toggleCrosshairs = function () {
+                    var state = this.chartComponent.chart.layout.crosshair;
+                    this.chartComponent.chart.layout.crosshair = !state;
+                };
                 ChartUI.prototype.getChartLayout = function () {
                     return this.chartComponent.getLayout();
                 };

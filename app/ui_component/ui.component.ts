@@ -51,6 +51,10 @@ export class ChartUI implements AfterViewChecked {
 		//update the ui
 		this.chartType=type.label;
 	}
+	toggleCrosshairs(){
+		let state=this.chartComponent.chart.layout.crosshair;
+		this.chartComponent.chart.layout.crosshair=!state;
+	}
 	getChartLayout(){
 		return this.chartComponent.getLayout();
 	}
