@@ -106,17 +106,127 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                             label: '1 Mon',
                         }
                     ];
+                    this.chartTypes = [
+                        {
+                            type: 'bar',
+                            label: 'bar',
+                        },
+                        {
+                            type: 'candle',
+                            label: 'candle',
+                        },
+                        {
+                            type: 'colored_bar',
+                            label: 'colored bar',
+                        },
+                        {
+                            type: 'hollow_candle',
+                            label: 'hollow candle',
+                        },
+                        {
+                            type: 'line',
+                            label: 'line',
+                        },
+                        {
+                            type: 'mountain',
+                            label: 'mountain',
+                        },
+                        {
+                            type: 'volume_candle',
+                            label: 'volume candle',
+                        },
+                        {
+                            type: 'heikinashi',
+                            label: 'Heikin-Ashi',
+                        },
+                        {
+                            type: 'kagi',
+                            label: 'kagi',
+                            aggregationEdit: {
+                                title: 'Set Reversal Percentage',
+                                inputs: [
+                                    {
+                                        lookup: 'kagi',
+                                        label: 'kagi',
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'linebreak',
+                            label: 'line break',
+                            aggregationEdit: {
+                                title: 'Set Price Lines',
+                                inputs: [
+                                    {
+                                        lookup: 'priceLines',
+                                        label: 'price line'
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'renko',
+                            label: 'renko',
+                            aggregationEdit: {
+                                title: 'Set Range',
+                                inputs: [
+                                    {
+                                        lookup: 'renko',
+                                        label: 'renko'
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'rangebars',
+                            label: 'range bars',
+                            aggregationEdit: {
+                                title: 'Set Range',
+                                inputs: [
+                                    {
+                                        lookup: 'range',
+                                        label: 'range'
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            type: 'pandf',
+                            label: 'point & figure',
+                            aggregationEdit: {
+                                title: 'Set Point & Figure Parameters',
+                                inputs: [
+                                    {
+                                        lookup: 'pandf.box',
+                                        label: 'box'
+                                    },
+                                    {
+                                        lookup: 'pandf.reversal',
+                                        label: 'reversal'
+                                    }
+                                ]
+                            }
+                        }
+                    ];
                     console.log(this.chartComponent);
-                    //this.periodicity=this.chartComponent;
+                    this.periodicity = "5 min";
+                    this.chartType = "candle";
                 }
                 ChartUI.prototype.ngAfterViewChecked = function () {
-                    var _this = this;
                     this.chartLayout = this.getChartLayout();
                     //console.log(this.chartLayout);
-                    //update the periodicity
+                };
+                ChartUI.prototype.changeSymbol = function () {
+                    this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
+                    this.symbolInput = '';
+                };
+                ChartUI.prototype.changePeriodicity = function (period, interval) {
+                    var _this = this;
+                    this.chartComponent.chart.setPeriodicityV2(period, interval);
                     var _loop_1 = function(i) {
                         if (this_1.periodicityOptions[i].interval == this_1.chartLayout.interval && this_1.periodicityOptions[i].period == this_1.chartLayout.periodicity) {
-                            this_1.zone.run(function () { _this.uiStateChange("periodicity", _this.periodicityOptions[i]); });
+                            this_1.zone.run(function () { _this.periodicity = _this.periodicityOptions[i].label; });
                         }
                     };
                     var this_1 = this;
@@ -124,17 +234,16 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                         _loop_1(i);
                     }
                 };
-                ChartUI.prototype.uiStateChange = function (what, change) {
-                    var _this = this;
-                    if (what == "periodicity")
-                        this.zone.run(function () { _this.periodicity = change.label; });
-                };
-                ChartUI.prototype.changeSymbol = function () {
-                    this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
-                    this.symbolInput = '';
-                };
-                ChartUI.prototype.changePeriodicity = function (period, interval) {
-                    this.chartComponent.chart.setPeriodicityV2(period, interval);
+                ChartUI.prototype.changeChartType = function (type) {
+                    if ((type.aggregationEdit && this.chartComponent.chart.layout.aggregationType != type.type) || type.type == 'heikinashi') {
+                        //ctrl.ciq.setChartType('candle');
+                        this.chartComponent.chart.setAggregationType(type.type);
+                    }
+                    else {
+                        this.chartComponent.chart.setChartType(type.type);
+                    }
+                    //update the ui
+                    this.chartType = type.label;
                 };
                 ChartUI.prototype.getChartLayout = function () {
                     return this.chartComponent.getLayout();

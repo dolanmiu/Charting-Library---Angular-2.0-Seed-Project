@@ -16,32 +16,40 @@ export class ChartUI implements AfterViewChecked {
 	symbolInput:string;
 	public chartLayout:any;
 	periodicity:string;
+	chartType:string;
 
 	constructor(private zone: NgZone){
 		console.log(this.chartComponent);
-		//this.periodicity=this.chartComponent;
+		this.periodicity="5 min";
+		this.chartType="candle";
 	}
 
 	ngAfterViewChecked(){
 		this.chartLayout=this.getChartLayout();
 		//console.log(this.chartLayout);
-		//update the periodicity
-		for(let i in this.periodicityOptions){
-			if(this.periodicityOptions[i].interval==this.chartLayout.interval && this.periodicityOptions[i].period==this.chartLayout.periodicity){
-				this.zone.run(()=>{this.uiStateChange("periodicity",this.periodicityOptions[i]);});
-			}
-		}
 	}
 
-	uiStateChange(what, change){
-		if(what=="periodicity") this.zone.run(()=>{this.periodicity=change.label;});
-	}
 	changeSymbol() {
 		this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
 		this.symbolInput='';
 	}
 	changePeriodicity(period, interval){
 		this.chartComponent.chart.setPeriodicityV2(period,interval);
+		for(let i in this.periodicityOptions){
+			if(this.periodicityOptions[i].interval==this.chartLayout.interval && this.periodicityOptions[i].period==this.chartLayout.periodicity){
+				this.zone.run(()=>{this.periodicity=this.periodicityOptions[i].label;});
+			}
+		}
+	}
+	changeChartType(type){
+		if((type.aggregationEdit && this.chartComponent.chart.layout.aggregationType != type.type) || type.type == 'heikinashi'){
+			//ctrl.ciq.setChartType('candle');
+			this.chartComponent.chart.setAggregationType(type.type);
+		} else {
+			this.chartComponent.chart.setChartType(type.type);
+		}
+		//update the ui
+		this.chartType=type.label;
 	}
 	getChartLayout(){
 		return this.chartComponent.getLayout();
@@ -129,5 +137,109 @@ export class ChartUI implements AfterViewChecked {
 				label: '1 Mon',
 			}
     ];
+
+	private chartTypes: Array<any> = [
+			{
+				type: 'bar',
+				label: 'bar',
+			},
+			{
+				type: 'candle',
+				label: 'candle',
+			},
+			{
+				type: 'colored_bar',
+				label: 'colored bar',
+			},
+			{
+				type: 'hollow_candle',
+				label: 'hollow candle',
+			},
+			{
+				type: 'line',
+				label: 'line',
+			},
+			{
+				type: 'mountain',
+				label: 'mountain',
+			},
+			{
+				type: 'volume_candle',
+				label: 'volume candle',
+			},
+			{
+				type: 'heikinashi',
+				label: 'Heikin-Ashi',
+			},
+			{
+				type: 'kagi',
+				label: 'kagi',
+				aggregationEdit: {
+					title: 'Set Reversal Percentage',
+					inputs: [
+						{
+							lookup: 'kagi',
+							label: 'kagi',
+						}
+					]
+				}
+			},
+			{
+				type: 'linebreak',
+				label: 'line break',
+				aggregationEdit: {
+					title: 'Set Price Lines',
+					inputs: [
+						{
+							lookup: 'priceLines',
+							label: 'price line'
+						}
+					]
+				}
+			},
+			{
+				type: 'renko',
+				label: 'renko',
+				aggregationEdit: {
+					title: 'Set Range',
+					inputs: [
+						{
+							lookup: 'renko',
+							label: 'renko'
+						}
+					]
+				}
+			},
+			{
+				type: 'rangebars',
+				label: 'range bars',
+				aggregationEdit: {
+					title: 'Set Range',
+					inputs: [
+						{
+							lookup: 'range',
+							label: 'range'
+						}
+					]
+				}
+			},
+			{
+				type: 'pandf',
+				label: 'point & figure',
+				aggregationEdit: {
+					title: 'Set Point & Figure Parameters',
+					inputs: [
+						{
+							lookup: 'pandf.box',
+							label: 'box'
+						},
+						{
+							lookup: 'pandf.reversal',
+							label: 'reversal'
+						}
+					]
+				}
+			}
+		];
 
 }

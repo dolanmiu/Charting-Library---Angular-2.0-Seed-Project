@@ -10,5 +10,14 @@
 		    </div>
 		</div>
 	</div>
+	<strong>Chart Type:</strong>
+	<div id="chartTypeSelect">
+		<span>{{chartType}}</span>
+		<div class="menu-hover">
+			<div class="option" *ngFor="#type of chartTypes" (click)="changeChartType(type)">
+				{{type.label}}
+			</div>
+		</div>
+	</div>
 	<chart></chart>
 </chart-ui>
