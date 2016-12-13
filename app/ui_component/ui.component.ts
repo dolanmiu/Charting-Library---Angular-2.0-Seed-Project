@@ -1,6 +1,5 @@
-import {Component, ViewChild, AfterViewChecked, ChangeDetectionStrategy, NgZone, Input} from 'angular2/core'
+import {Component, ViewChild, AfterViewChecked, ChangeDetectionStrategy, NgZone} from 'angular2/core'
 import {ChartComponent} from '../chart_component/chart.component'
-import {PeriodicityPipe} from '../pipes/periodicity_pipe'
 
 declare var STX: any;
 
@@ -8,7 +7,6 @@ declare var STX: any;
     selector: 'chart-ui',
 	styleUrls:['app/ui_component/ui.component.css'],
     templateUrl: 'app/ui_component/ui.component.html',
-	pipes: [PeriodicityPipe],
 	directives:[ChartComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
