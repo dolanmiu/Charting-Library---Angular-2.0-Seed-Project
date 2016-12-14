@@ -1,61 +1,63 @@
 <html>
+	<head>
+		<title>Angular 2.0 QuickStart</title>
 
-  <head>
-    <title>Angular 2 QuickStart</title>
+		<!-- 1. Load libraries -->
+		<!-- IE required polyfills, in this exact order -->
+		<script src="node_modules/es6-shim/es6-shim.min.js"></script>
+		<script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+		<script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+		<script src="node_modules/systemjs/dist/system.src.js"></script>
+		<script src="node_modules/rxjs/bundles/Rx.js"></script>
+		<script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-    <!-- 1. Load libraries -->
-    <!-- IE required polyfills, in this exact order -->
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+		<!-- The ChartIQ required CSS -->
+		<link rel="stylesheet" href="chartiq_library/css/stx-chart.css">
 
-    	<!-- Sample css file may be customized -->
+		<!-- The ChartIQ library -->
+		<script src="chartiq_library/js/core/polyfills.js"></script>
+		<script src="chartiq_library/js/core/utility.js"></script>
+		<script src="chartiq_library/js/core/timezone.js"></script>
+		<script src="chartiq_library/js/core/core.js"></script>
+		<script src="chartiq_library/js/core/market.js"></script>
+		<script src="chartiq_library/js/core/engine.js"></script>
+		<script src="chartiq_library/js/core/microkernel.js"></script>
+		<script src="chartiq_library/js/core/master.js"></script>
+		<script src="chartiq_library/js/intl.js"></script>
+		<script src="chartiq_library/js/span.js"></script>
+		<script src="chartiq_library/js/quoteFeed.js"></script>
+		<script src="chartiq_library/js/quoteFeedSamples.js"></script>
+		<script src="chartiq_library/js/studies.js"></script>
+		<script src="chartiq_library/js/drawing.js"></script>
+		<script src="chartiq_library/js/i18n.js"></script>
+		<script src="chartiq_library/js/customCharts.js"></script>
+		<script src="chartiq_library/js/markers.js"></script>
+		<script src="chartiq_library/js/thirdparty/splines.js"></script>
+		<script src="chartiq_library/js/advanced/aggregations.js"></script>
+		<script src="chartiq_library/js/advanced/drawingAdvanced.js"></script>
+		<script src="chartiq_library/js/advanced/equations.js"></script>
+		<script src="chartiq_library/js/advanced/renderersAdvanced.js"></script>
+		<script src="chartiq_library/js/advanced/share.js"></script>
+		<script src="chartiq_library/js/advanced/studiesAdvanced.js"></script>
 
-  <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
-  <!-- <link rel="stylesheet" type="text/css" href="app/chartiq_library/css/normalize.css" media="screen" /> -->
-	<link rel="stylesheet" type="text/css" href="app/chartiq_library/css/stx-standard.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="app/chartiq_library/css/stx-chart.css" media="screen" /> 
-  <!-- <link rel="stylesheet" type="text/css" href="app/chartiq_library/css/stx-advanced.css" media="screen" /> -->
-	<link rel="stylesheet" type="text/css" href="app/chartiq_library/css/stx-print.css" media="print" />
-  <!-- <link rel="stylesheet" type="text/css" href="app/chartiq_library/css/chartiq.css" media="screen" /> -->
-	<link rel="stylesheet" type="text/css" href="app/chartiq_library/css/font-awesome.css" media="screen" /> 
+	    <!-- 2. Configure SystemJS -->
+	    <script>
+	      System.config({
+	        packages: {
+	          app: {
+	            format: 'register',
+	            defaultExtension: 'js'
+	          }
+	        }
+	      });
+	      System.import('app/boot')
+	            .then(null, console.error.bind(console));
+	    </script>
+	</head>
 
-
-	<!--[if IE 8]><script type="text/javascript" src="js/excanvas.js"></script><![endif]--><!-- Use excanvas.js to support IE8. See notes in chartContainer -->
-	<!--[if IE 8]><script>var isIE8=true;</script><![endif]-->
-	<script src="app/chartiq_library/js/stxThirdParty.js"></script>
-	<script src="app/chartiq_library/js/stxTimeZoneData.js"></script>
-	<script src="app/chartiq_library/js/stx.js"></script>
-	<script src="app/chartiq_library/js/stxKernelOs.js"></script>
-	<script src="app/chartiq_library/js/stxLibrary.js"></script> 
-	<script src="app/chartiq_library/js/stxAdvanced.js"></script>
-	<script src="app/chartiq_library/js/stxShare.js"></script>
-	<script src="app/chartiq_library/js/stxSymLookup_Xignite_Svc.js"></script>
-	<script src="app/chartiq_library/js/translations.js"></script>
-
-    <!-- 2. Configure SystemJS -->
-    <script>
-      System.config({
-        packages: {        
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
-        }
-      });
-      System.import('app/boot')
-            .then(null, console.error.bind(console));
-    </script>
-
-  </head>
-
-  <!-- 3. Display the application -->
-  <body>
-    <my-app>Loading...</my-app>
-  </body>
+	<!-- 3. Display the application -->
+	<body>
+		<my-app>Loading...</my-app>
+	</body>
 
 </html>

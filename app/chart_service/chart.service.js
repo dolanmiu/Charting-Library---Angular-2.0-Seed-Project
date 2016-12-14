@@ -9,7 +9,7 @@ System.register([], function(exports_1, context_1) {
                 function ChartService() {
                 }
                 ChartService.prototype.attachQuoteFeed = function (chart) {
-                    chart.attachQuoteFeed(new STX.QuoteFeed.Demo(), { refreshInterval: 1 });
+                    chart.attachQuoteFeed(new CIQ.QuoteFeed.Demo(), { refreshInterval: 1 });
                 };
                 return ChartService;
             }());

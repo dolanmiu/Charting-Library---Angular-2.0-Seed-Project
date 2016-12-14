@@ -1,8 +1,8 @@
-declare var STX: any;
+declare var CIQ: any;
 
 export class ChartService {
 
     attachQuoteFeed(chart): void {
-        chart.attachQuoteFeed(new STX.QuoteFeed.Demo(), { refreshInterval: 1 })
+        chart.attachQuoteFeed(new CIQ.QuoteFeed.Demo(), { refreshInterval: 1 })
     }   
 }

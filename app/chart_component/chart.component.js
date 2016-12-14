@@ -28,7 +28,7 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
                 }
                 ;
                 ChartComponent.prototype.ngOnInit = function () {
-                    this.chart = new STXChart({ container: $$$("#chartContainer") });
+                    this.chart = new CIQ.ChartEngine({ container: $$$("#chartContainer") });
                     this.chart.setPeriodicityV2(1, 5);
                     this.chartService.attachQuoteFeed(this.chart);
                     this.chart.newChart("IBM");

@@ -1,8 +1,7 @@
 import {Component, OnInit} from 'angular2/core'
 import {ChartService} from '../chart_service/chart.service'
 
-declare var STXChart: any;
-declare var STX: any;
+declare var CIQ: any;
 declare var $$$: any;
 
 @Component({
@@ -21,7 +20,7 @@ export class ChartComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.chart = new STXChart({ container: $$$("#chartContainer")});
+        this.chart = new CIQ.ChartEngine({ container: $$$("#chartContainer")});
         this.chart.setPeriodicityV2(1, 5);
         this.chartService.attachQuoteFeed(this.chart);
         this.chart.newChart("IBM");

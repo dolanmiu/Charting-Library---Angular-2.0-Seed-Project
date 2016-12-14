@@ -1,7 +1,7 @@
 import {Component, ViewChild, AfterViewChecked, ChangeDetectionStrategy, NgZone} from 'angular2/core'
 import {ChartComponent} from '../chart_component/chart.component'
 
-declare var STX: any;
+declare var CIQ: any;
 
 @Component({
     selector: 'chart-ui',
