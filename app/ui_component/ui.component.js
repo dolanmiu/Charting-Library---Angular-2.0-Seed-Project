@@ -216,12 +216,12 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                     this.chartLayout = this.getChartLayout();
                 };
                 ChartUI.prototype.changeSymbol = function () {
-                    this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
+                    this.chartComponent.ciq.newChart(this.symbolInput, this.chartComponent.sampleData);
                     this.symbolInput = '';
                 };
                 ChartUI.prototype.changePeriodicity = function (period, interval) {
                     var _this = this;
-                    this.chartComponent.chart.setPeriodicityV2(period, interval);
+                    this.chartComponent.ciq.setPeriodicityV2(period, interval);
                     var _loop_1 = function(i) {
                         if (this_1.periodicityOptions[i].interval == this_1.chartLayout.interval && this_1.periodicityOptions[i].period == this_1.chartLayout.periodicity) {
                             this_1.zone.run(function () { _this.periodicity = _this.periodicityOptions[i].label; });
@@ -233,19 +233,19 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                     }
                 };
                 ChartUI.prototype.changeChartType = function (type) {
-                    if ((type.aggregationEdit && this.chartComponent.chart.layout.aggregationType != type.type) || type.type == 'heikinashi') {
+                    if ((type.aggregationEdit && this.chartComponent.ciq.layout.aggregationType != type.type) || type.type == 'heikinashi') {
                         //ctrl.ciq.setChartType('candle');  This might make this chart type more useful for the end user
-                        this.chartComponent.chart.setAggregationType(type.type);
+                        this.chartComponent.ciq.setAggregationType(type.type);
                     }
                     else {
-                        this.chartComponent.chart.setChartType(type.type);
+                        this.chartComponent.ciq.setChartType(type.type);
                     }
                     //update the ui
                     this.chartType = type.label;
                 };
                 ChartUI.prototype.toggleCrosshairs = function () {
-                    var state = this.chartComponent.chart.layout.crosshair;
-                    this.chartComponent.chart.layout.crosshair = !state;
+                    var state = this.chartComponent.ciq.layout.crosshair;
+                    this.chartComponent.ciq.layout.crosshair = !state;
                 };
                 ChartUI.prototype.addComparison = function () {
                     if (this.symbolComparison) {
@@ -258,7 +258,7 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                             }
                             return color;
                         }
-                        var newSeries = this.chartComponent.chart.addSeries(this.symbolComparison, {
+                        var newSeries = this.chartComponent.ciq.addSeries(this.symbolComparison, {
                             isComparison: true,
                             color: getRandomColor(),
                             data: { useDefaultQuoteFeed: true },

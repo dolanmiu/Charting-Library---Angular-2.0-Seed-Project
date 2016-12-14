@@ -11,7 +11,7 @@ declare var $$$: any;
     providers: [ChartService]
 })
 export class ChartComponent implements OnInit {
-    chart: any;
+    ciq: any;
     sampleData: any[];
 	chartSeries:any[];
 
@@ -20,15 +20,22 @@ export class ChartComponent implements OnInit {
     };
 
     ngOnInit() {
-        this.chart = new CIQ.ChartEngine({ container: $$$("#chartContainer")});
-        this.chart.setPeriodicityV2(1, 5);
-        this.chartService.attachQuoteFeed(this.chart);
-        this.chart.newChart("IBM");
+        this.ciq = new CIQ.ChartEngine({ container: $$$("#chartContainer")});
+        this.ciq.setPeriodicityV2(1, 5);
+        this.chartService.attachQuoteFeed(this.ciq);
+        this.ciq.newChart("IBM");
     }
     getLayout() {
-    	return this.chart.layout;
+    	return this.ciq.layout;
     }
-    removeSeries(seriesName){
-	    this.chart.removeSeries(seriesName, this.chart);
+    removeSeries(series){
+    	console.log(series);
+	    var index = this.chartSeries.indexOf(series, 0);
+	    console.log(index);
+	    if (index > -1) {
+		    this.chartSeries.splice(index, 1);
+		    console.log(this.chartSeries);
+	    }
+	    this.ciq.removeSeries(series.display, this.ciq.ciq);
     }
 }

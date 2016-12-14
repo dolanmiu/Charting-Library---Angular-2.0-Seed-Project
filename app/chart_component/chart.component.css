@@ -1,5 +1,14 @@
+html, body, div, span {
+	margin:0;
+	padding:0;
+	border:0;
+	font:inherit;
+	font-size:100%;
+	vertical-align:baseline;
+	text-align:left;
+}
+
 #chartContainer{
-	margin:0 auto;
 	width:800px;
 	height:500px;
 	position:relative;
@@ -37,6 +46,7 @@ div.comparisonWrapper{
 }
 
 div.comparisons{
+	position:absolute;
 	display: flex;
 	flex-direction: column;
 	float:left;

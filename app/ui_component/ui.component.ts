@@ -29,11 +29,11 @@ export class ChartUI implements AfterViewChecked {
 	}
 
 	changeSymbol() {
-		this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
+		this.chartComponent.ciq.newChart(this.symbolInput, this.chartComponent.sampleData);
 		this.symbolInput='';
 	}
 	changePeriodicity(period, interval){
-		this.chartComponent.chart.setPeriodicityV2(period,interval);
+		this.chartComponent.ciq.setPeriodicityV2(period,interval);
 		for(let i in this.periodicityOptions){
 			if(this.periodicityOptions[i].interval==this.chartLayout.interval && this.periodicityOptions[i].period==this.chartLayout.periodicity){
 				this.zone.run(()=>{this.periodicity=this.periodicityOptions[i].label;});
@@ -41,18 +41,18 @@ export class ChartUI implements AfterViewChecked {
 		}
 	}
 	changeChartType(type){
-		if((type.aggregationEdit && this.chartComponent.chart.layout.aggregationType != type.type) || type.type == 'heikinashi'){
+		if((type.aggregationEdit && this.chartComponent.ciq.layout.aggregationType != type.type) || type.type == 'heikinashi'){
 			//ctrl.ciq.setChartType('candle');  This might make this chart type more useful for the end user
-			this.chartComponent.chart.setAggregationType(type.type);
+			this.chartComponent.ciq.setAggregationType(type.type);
 		} else {
-			this.chartComponent.chart.setChartType(type.type);
+			this.chartComponent.ciq.setChartType(type.type);
 		}
 		//update the ui
 		this.chartType=type.label;
 	}
 	toggleCrosshairs(){
-		let state=this.chartComponent.chart.layout.crosshair;
-		this.chartComponent.chart.layout.crosshair=!state;
+		let state=this.chartComponent.ciq.layout.crosshair;
+		this.chartComponent.ciq.layout.crosshair=!state;
 	}
 	addComparison(){
 		if(this.symbolComparison) {
@@ -65,7 +65,7 @@ export class ChartUI implements AfterViewChecked {
 				}
 				return color;
 			}
-			let newSeries=this.chartComponent.chart.addSeries(this.symbolComparison, {
+			let newSeries=this.chartComponent.ciq.addSeries(this.symbolComparison, {
 				isComparison: true,
 				color: getRandomColor(),
 				data: {useDefaultQuoteFeed: true},

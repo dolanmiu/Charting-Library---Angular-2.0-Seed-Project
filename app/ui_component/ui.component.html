@@ -1,7 +1,6 @@
 <chart-ui #chartComponent>
 	<input [(ngModel)]="symbolInput">
 	<button (click)=changeSymbol()>Change Symbol</button>
-    <strong>Periodicity:</strong>
 	<div id="periodicitySelect">
 		<span>{{periodicity}}</span>
 		<div class="menu-hover">
@@ -10,7 +9,6 @@
 		    </div>
 		</div>
 	</div>
-	<strong>Chart Type:</strong>
 	<div id="chartTypeSelect">
 		<span>{{chartType}}</span>
 		<div class="menu-hover">
