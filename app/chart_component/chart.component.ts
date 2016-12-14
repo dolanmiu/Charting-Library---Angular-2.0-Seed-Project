@@ -29,12 +29,9 @@ export class ChartComponent implements OnInit {
     	return this.ciq.layout;
     }
     removeSeries(series){
-    	console.log(series);
 	    var index = this.chartSeries.indexOf(series, 0);
-	    console.log(index);
 	    if (index > -1) {
 		    this.chartSeries.splice(index, 1);
-		    console.log(this.chartSeries);
 	    }
 	    this.ciq.removeSeries(series.display, this.ciq.ciq);
     }
