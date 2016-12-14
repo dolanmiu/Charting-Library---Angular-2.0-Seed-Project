@@ -17,16 +17,15 @@ export class ChartUI implements AfterViewChecked {
 	public chartLayout:any;
 	periodicity:string;
 	chartType:string;
+	symbolComparison:string;
 
 	constructor(private zone: NgZone){
-		console.log(this.chartComponent);
 		this.periodicity="5 min";
 		this.chartType="candle";
 	}
 
 	ngAfterViewChecked(){
 		this.chartLayout=this.getChartLayout();
-		//console.log(this.chartLayout);
 	}
 
 	changeSymbol() {
@@ -43,7 +42,7 @@ export class ChartUI implements AfterViewChecked {
 	}
 	changeChartType(type){
 		if((type.aggregationEdit && this.chartComponent.chart.layout.aggregationType != type.type) || type.type == 'heikinashi'){
-			//ctrl.ciq.setChartType('candle');
+			//ctrl.ciq.setChartType('candle');  This might make this chart type more useful for the end user
 			this.chartComponent.chart.setAggregationType(type.type);
 		} else {
 			this.chartComponent.chart.setChartType(type.type);
@@ -54,6 +53,31 @@ export class ChartUI implements AfterViewChecked {
 	toggleCrosshairs(){
 		let state=this.chartComponent.chart.layout.crosshair;
 		this.chartComponent.chart.layout.crosshair=!state;
+	}
+	addComparison(){
+		if(this.symbolComparison) {
+			// Note that this color generator has a bias toward darker colors. Just needed a quick solution here.
+			function getRandomColor() {
+				let letters = '0123456789ABCDEF';
+				let color = '#';
+				for (var i = 0; i < 6; i++) {
+					color += letters[Math.floor(Math.random() * 16)];
+				}
+				return color;
+			}
+			let newSeries=this.chartComponent.chart.addSeries(this.symbolComparison, {
+				isComparison: true,
+				color: getRandomColor(),
+				data: {useDefaultQuoteFeed: true},
+				permanent:true
+			});
+			//update the comparison legend
+			this.chartComponent.chartSeries.push(newSeries);
+			this.symbolComparison=null;
+		}
+		else{
+			console.log("Error: no symbol for comparison entered");
+		}
 	}
 	getChartLayout(){
 		return this.chartComponent.getLayout();

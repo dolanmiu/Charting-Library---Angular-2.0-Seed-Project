@@ -14,8 +14,11 @@ declare var $$$: any;
 export class ChartComponent implements OnInit {
     chart: any;
     sampleData: any[];
+	chartSeries:any[];
 
-    constructor(private chartService: ChartService) { };
+    constructor(private chartService: ChartService) {
+    	this.chartSeries=[];
+    };
 
     ngOnInit() {
         this.chart = new STXChart({ container: $$$("#chartContainer")});
@@ -25,5 +28,8 @@ export class ChartComponent implements OnInit {
     }
     getLayout() {
     	return this.chart.layout;
+    }
+    removeSeries(seriesName){
+	    this.chart.removeSeries(seriesName, this.chart);
     }
 }

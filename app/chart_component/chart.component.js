@@ -24,6 +24,7 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
             ChartComponent = (function () {
                 function ChartComponent(chartService) {
                     this.chartService = chartService;
+                    this.chartSeries = [];
                 }
                 ;
                 ChartComponent.prototype.ngOnInit = function () {
@@ -34,6 +35,9 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
                 };
                 ChartComponent.prototype.getLayout = function () {
                     return this.chart.layout;
+                };
+                ChartComponent.prototype.removeSeries = function (seriesName) {
+                    this.chart.removeSeries(seriesName, this.chart);
                 };
                 ChartComponent = __decorate([
                     core_1.Component({

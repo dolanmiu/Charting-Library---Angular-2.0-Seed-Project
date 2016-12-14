@@ -209,13 +209,11 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                             }
                         }
                     ];
-                    console.log(this.chartComponent);
                     this.periodicity = "5 min";
                     this.chartType = "candle";
                 }
                 ChartUI.prototype.ngAfterViewChecked = function () {
                     this.chartLayout = this.getChartLayout();
-                    //console.log(this.chartLayout);
                 };
                 ChartUI.prototype.changeSymbol = function () {
                     this.chartComponent.chart.newChart(this.symbolInput, this.chartComponent.sampleData);
@@ -236,7 +234,7 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                 };
                 ChartUI.prototype.changeChartType = function (type) {
                     if ((type.aggregationEdit && this.chartComponent.chart.layout.aggregationType != type.type) || type.type == 'heikinashi') {
-                        //ctrl.ciq.setChartType('candle');
+                        //ctrl.ciq.setChartType('candle');  This might make this chart type more useful for the end user
                         this.chartComponent.chart.setAggregationType(type.type);
                     }
                     else {
@@ -248,6 +246,31 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                 ChartUI.prototype.toggleCrosshairs = function () {
                     var state = this.chartComponent.chart.layout.crosshair;
                     this.chartComponent.chart.layout.crosshair = !state;
+                };
+                ChartUI.prototype.addComparison = function () {
+                    if (this.symbolComparison) {
+                        // Note that this color generator has a bias toward darker colors. Just needed a quick solution here.
+                        function getRandomColor() {
+                            var letters = '0123456789ABCDEF';
+                            var color = '#';
+                            for (var i = 0; i < 6; i++) {
+                                color += letters[Math.floor(Math.random() * 16)];
+                            }
+                            return color;
+                        }
+                        var newSeries = this.chartComponent.chart.addSeries(this.symbolComparison, {
+                            isComparison: true,
+                            color: getRandomColor(),
+                            data: { useDefaultQuoteFeed: true },
+                            permanent: true
+                        });
+                        //update the comparison legend
+                        this.chartComponent.chartSeries.push(newSeries);
+                        this.symbolComparison = null;
+                    }
+                    else {
+                        console.log("Error: no symbol for comparison entered");
+                    }
                 };
                 ChartUI.prototype.getChartLayout = function () {
                     return this.chartComponent.getLayout();
