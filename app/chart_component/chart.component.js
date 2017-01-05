@@ -37,12 +37,9 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
                     return this.ciq.layout;
                 };
                 ChartComponent.prototype.removeSeries = function (series) {
-                    console.log(series);
                     var index = this.chartSeries.indexOf(series, 0);
-                    console.log(index);
                     if (index > -1) {
                         this.chartSeries.splice(index, 1);
-                        console.log(this.chartSeries);
                     }
                     this.ciq.removeSeries(series.display, this.ciq.ciq);
                 };

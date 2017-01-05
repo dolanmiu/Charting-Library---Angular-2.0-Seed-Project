@@ -1,4 +1,12 @@
-<chart-ui #chartComponent>
+<chart-ui #uiComponent>
+	<div id="studySelect">
+		<span>{{studies.selectedOption || "Add Study"}}</span>
+		<div class="menu-hover">
+			<div class="option" *ngFor="#study of studies.list" (click)="studyDialog.addStudy(study, chartComponent.ciq)">
+				{{study}}
+			</div>
+		</div>
+	</div>
 	<input [(ngModel)]="symbolInput">
 	<button (click)=changeSymbol()>Change Symbol</button>
 	<div id="periodicitySelect">
@@ -20,5 +28,6 @@
 	<button (click)="toggleCrosshairs()">Crosshairs</button>
 	<input [(ngModel)]="symbolComparison">
 	<button (click)="addComparison()">Add Comparison</button>
-	<chart></chart>
+	<chart #chartComponent></chart>
+	<study-dialog #studyDialog [(launchDialog)]="launchDialog"></study-dialog>
 </chart-ui>

@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../chart_component/chart.component'], function(exports_1, context_1) {
+System.register(['angular2/core', '../chart_component/chart.component', '../study_dialog_component/study.dialog.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, chart_component_1;
+    var core_1, chart_component_1, study_dialog_component_1;
     var ChartUI;
     return {
         setters:[
@@ -19,11 +19,18 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
             },
             function (chart_component_1_1) {
                 chart_component_1 = chart_component_1_1;
+            },
+            function (study_dialog_component_1_1) {
+                study_dialog_component_1 = study_dialog_component_1_1;
             }],
         execute: function() {
             ChartUI = (function () {
                 function ChartUI(zone) {
                     this.zone = zone;
+                    this.studies = {
+                        list: Object.keys(CIQ.Studies.studyLibrary),
+                        selectedOption: ''
+                    };
                     this.periodicityOptions = [
                         {
                             period: 1,
@@ -284,7 +291,7 @@ System.register(['angular2/core', '../chart_component/chart.component'], functio
                         selector: 'chart-ui',
                         styleUrls: ['app/ui_component/ui.component.css'],
                         templateUrl: 'app/ui_component/ui.component.html',
-                        directives: [chart_component_1.ChartComponent],
+                        directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     }), 
                     __metadata('design:paramtypes', [core_1.NgZone])

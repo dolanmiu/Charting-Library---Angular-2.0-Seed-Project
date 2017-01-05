@@ -1,0 +1,40 @@
+<div id="studyDialog" *ngIf="launchDialog | async">
+	<div class="content">
+		<div class="heading">{{studyName}}</div>
+		<div id="inputs">
+			<div class="inputs" *ngFor="#input of inputs | filterByPropertyPipe:{type: 'number'}">
+				<input type="number" [(ngModel)]="input.value">
+				<div>{{input.heading}}</div>
+			</div>
+			<div class="inputs" *ngFor="#input of inputs | filterByPropertyPipe:{type: 'text'}">
+				<input type="text" [(ngModel)]="input.value">
+				<div>{{input.heading}}</div>
+			</div>
+			<div class="inputs" *ngFor="#input of inputs | filterByPropertyPipe:{type: 'checkbox'}">
+				<input type="checkbox" [(ngModel)]="input.value">
+				<div>{{input.heading}}</div>
+			</div>
+			<div class="inputs" *ngFor="#input of inputs | filterByPropertyPipe:{type: 'select'}">
+				<select [(ngModel)]="value">
+					<option *ngFor="#option of input.options">{{option}}</option>
+				</select>
+				<div>{{input.heading}}</div>
+			</div>
+		</div>
+		<div id="outputs">
+			<div class="outputs" *ngFor="#output of outputs">
+				<div *ngIf="output.color" style="background-color:{{output.color}}" class="color-picker-swatch output" (click)="launchColorpicker(output,$event)"></div>
+				<div>{{output.heading}}</div>
+			</div>
+		</div>
+		<div id="parameters">
+			<div class="parameters" *ngFor="#param of parameters">
+				<div *ngIf="param.color" style="background-color:{{param.color}}" class="color-picker-swatch param" (click)="launchColorpicker(param,$event)"></div>
+				<input *ngIf="param.name=='studyOverZones'" type="checkbox" ngModel="param.value">
+				<input *ngIf="param.name=='studyOverBought' || param.name=='studyOverSold'" type="number" ngModel="param.value">
+				<div>{{param.heading}}</div>
+			</div>
+		</div>
+		<button class="largeBtn" (click)="updateStudy(inputs, outputs, parameters); closeMe();">Save</button>
+	</div>
+</div>

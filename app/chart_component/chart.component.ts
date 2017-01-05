@@ -10,6 +10,7 @@ declare var $$$: any;
     templateUrl: 'app/chart_component/chart.component.html',
     providers: [ChartService]
 })
+
 export class ChartComponent implements OnInit {
     ciq: any;
     sampleData: any[];
@@ -25,9 +26,11 @@ export class ChartComponent implements OnInit {
         this.chartService.attachQuoteFeed(this.ciq);
         this.ciq.newChart("IBM");
     }
+
     getLayout() {
     	return this.ciq.layout;
     }
+
     removeSeries(series){
 	    var index = this.chartSeries.indexOf(series, 0);
 	    if (index > -1) {

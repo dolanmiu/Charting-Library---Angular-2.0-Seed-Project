@@ -1,5 +1,6 @@
 import {Component, ViewChild, AfterViewChecked, ChangeDetectionStrategy, NgZone} from 'angular2/core'
 import {ChartComponent} from '../chart_component/chart.component'
+import {StudyDialog} from '../study_dialog_component/study.dialog.component'
 
 declare var CIQ: any;
 
@@ -7,7 +8,7 @@ declare var CIQ: any;
     selector: 'chart-ui',
 	styleUrls:['app/ui_component/ui.component.css'],
     templateUrl: 'app/ui_component/ui.component.html',
-	directives:[ChartComponent],
+	directives:[ChartComponent, StudyDialog],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -19,15 +20,17 @@ export class ChartUI implements AfterViewChecked {
 	chartType:string;
 	symbolComparison:string;
 
+	studies:any={
+		list:Object.keys(CIQ.Studies.studyLibrary),
+		selectedOption:''
+	};
 	constructor(private zone: NgZone){
 		this.periodicity="5 min";
 		this.chartType="candle";
 	}
-
 	ngAfterViewChecked(){
 		this.chartLayout=this.getChartLayout();
 	}
-
 	changeSymbol() {
 		this.chartComponent.ciq.newChart(this.symbolInput, this.chartComponent.sampleData);
 		this.symbolInput='';
