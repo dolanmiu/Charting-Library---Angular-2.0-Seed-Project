@@ -30,8 +30,8 @@
 		<div id="parameters">
 			<div class="parameters" *ngFor="#param of parameters">
 				<div *ngIf="param.color" style="background-color:{{param.color}}" class="color-picker-swatch param" (click)="launchColorpicker(param,$event)"></div>
-				<input *ngIf="param.name=='studyOverZones'" type="checkbox" ngModel="param.value">
-				<input *ngIf="param.name=='studyOverBought' || param.name=='studyOverSold'" type="number" ngModel="param.value">
+				<input *ngIf="param.name=='studyOverZones'" type="checkbox" [(ngModel)]="param.value">
+				<input *ngIf="param.name=='studyOverBought' || param.name=='studyOverSold'" type="number" [(ngModel)]="param.value">
 				<div>{{param.heading}}</div>
 			</div>
 		</div>

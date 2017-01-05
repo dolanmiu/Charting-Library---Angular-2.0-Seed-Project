@@ -1,5 +1,5 @@
 import {Component, NgZone, Output, EventEmitter} from 'angular2/core'
-import {FilterByPropertyPipe} from '../pipes/study.dialog.pipes'
+import {FilterByPropertyPipe} from '../pipes/property.filter.pipe'
 
 declare var CIQ: any;
 
