@@ -1,6 +1,8 @@
 import {Component, ViewChild, AfterViewChecked, ChangeDetectionStrategy, NgZone} from 'angular2/core'
 import {ChartComponent} from '../chart_component/chart.component'
 import {StudyDialog} from '../study_dialog_component/study.dialog.component'
+import {ThemeDialog} from '../theme_dialog_component/theme.dialog.component'
+import {Colorpicker} from '../colorpicker_component/colorpicker'
 
 declare var CIQ: any;
 
@@ -8,22 +10,19 @@ declare var CIQ: any;
     selector: 'chart-ui',
 	styleUrls:['app/ui_component/ui.component.css'],
     templateUrl: 'app/ui_component/ui.component.html',
-	directives:[ChartComponent, StudyDialog],
+	directives:[ChartComponent, StudyDialog, ThemeDialog, Colorpicker],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ChartUI implements AfterViewChecked {
     @ViewChild(ChartComponent) chartComponent:ChartComponent;
+    @ViewChild(ThemeDialog) themeDialog:ThemeDialog;
 	symbolInput:string;
 	public chartLayout:any;
 	periodicity:string;
 	chartType:string;
 	symbolComparison:string;
 
-	studies:any={
-		list:Object.keys(CIQ.Studies.studyLibrary),
-		selectedOption:''
-	};
 	constructor(private zone: NgZone){
 		this.periodicity="5 min";
 		this.chartType="candle";
@@ -86,7 +85,49 @@ export class ChartUI implements AfterViewChecked {
 		return this.chartComponent.getLayout();
 	}
 
-    private periodicityOptions: Array<any> = [
+	handleThemeSelect(theme){
+		if(theme.name=="+ New Theme"){
+			this.themeDialog.showDialog(this.chartComponent.ciq);
+		}
+		else{
+			console.log(theme);
+			this.themeDialog.updateTheme(theme);
+		}
+	}
+
+	updateThemeList(params){
+		if(params.name){ // we aren't going to allow unnamed themes to be created
+			var duplicate=false;
+			for(var i=0; i<this.themes.length; i++){
+				if(this.themes[i].name==params.name) {
+					this.themes[i].settings = params.settings;
+					duplicate=true;
+				}
+			}
+			if(!duplicate) // if it's duplicate we are going to update that existing theme
+				this.themes.push(params);
+		}
+		else console.error("Please name your custom theme.");
+	};
+
+	studies:any={
+		list:Object.keys(CIQ.Studies.studyLibrary),
+		selectedOption:''
+	};
+
+	themes:any=[{"name": "Default",
+		"settings": // the default theme settings
+			{"chart":{"Axis Text":{"color":"rgba(102,102,102,1)"},
+				"Background":{"color":"rgba(255,255,255,1)"},
+				"Grid Dividers":{"color":"rgba(204,204,204,1)"},
+				"Grid Lines":{"color":"rgba(239,239,239,1)"}},
+				"chartTypes":{"Candle/Bar":{"down": {"border":"rgba(0,0,0,1)", "color":"rgba(184,44,12,1)", "wick":"rgba(0,0,0,1)"},
+					"up":{"border":"rgba(0,0,0,1)", "color":"rgba(140,193,118,1)", "wick":"rgba(0,0,0,1)"}},
+					"Line":{"color":"rgba(0,0,0,1)"},
+					"Mountain":{"color":"rgba(102,202,196,0.498039)"}}}},
+		{"name":"+ New Theme"}];
+
+    periodicityOptions: Array<any> = [
 			{
 				period: 1,
 				interval: 1,
@@ -169,7 +210,7 @@ export class ChartUI implements AfterViewChecked {
 			}
     ];
 
-	private chartTypes: Array<any> = [
+	chartTypes: Array<any> = [
 			{
 				type: 'bar',
 				label: 'bar',

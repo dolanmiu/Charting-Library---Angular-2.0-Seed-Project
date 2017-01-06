@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../chart_component/chart.component', '../study_dialog_component/study.dialog.component'], function(exports_1, context_1) {
+System.register(['angular2/core', '../chart_component/chart.component', '../study_dialog_component/study.dialog.component', '../theme_dialog_component/theme.dialog.component', '../colorpicker_component/colorpicker'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, chart_component_1, study_dialog_component_1;
+    var core_1, chart_component_1, study_dialog_component_1, theme_dialog_component_1, colorpicker_1;
     var ChartUI;
     return {
         setters:[
@@ -22,6 +22,12 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
             },
             function (study_dialog_component_1_1) {
                 study_dialog_component_1 = study_dialog_component_1_1;
+            },
+            function (theme_dialog_component_1_1) {
+                theme_dialog_component_1 = theme_dialog_component_1_1;
+            },
+            function (colorpicker_1_1) {
+                colorpicker_1 = colorpicker_1_1;
             }],
         execute: function() {
             ChartUI = (function () {
@@ -31,6 +37,17 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
                         list: Object.keys(CIQ.Studies.studyLibrary),
                         selectedOption: ''
                     };
+                    this.themes = [{ "name": "Default",
+                            "settings": // the default theme settings
+                            { "chart": { "Axis Text": { "color": "rgba(102,102,102,1)" },
+                                    "Background": { "color": "rgba(255,255,255,1)" },
+                                    "Grid Dividers": { "color": "rgba(204,204,204,1)" },
+                                    "Grid Lines": { "color": "rgba(239,239,239,1)" } },
+                                "chartTypes": { "Candle/Bar": { "down": { "border": "rgba(0,0,0,1)", "color": "rgba(184,44,12,1)", "wick": "rgba(0,0,0,1)" },
+                                        "up": { "border": "rgba(0,0,0,1)", "color": "rgba(140,193,118,1)", "wick": "rgba(0,0,0,1)" } },
+                                    "Line": { "color": "rgba(0,0,0,1)" },
+                                    "Mountain": { "color": "rgba(102,202,196,0.498039)" } } } },
+                        { "name": "+ New Theme" }];
                     this.periodicityOptions = [
                         {
                             period: 1,
@@ -282,16 +299,45 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
                 ChartUI.prototype.getChartLayout = function () {
                     return this.chartComponent.getLayout();
                 };
+                ChartUI.prototype.handleThemeSelect = function (theme) {
+                    if (theme.name == "+ New Theme") {
+                        this.themeDialog.showDialog(this.chartComponent.ciq);
+                    }
+                    else {
+                        console.log(theme);
+                        this.themeDialog.updateTheme(theme);
+                    }
+                };
+                ChartUI.prototype.updateThemeList = function (params) {
+                    if (params.name) {
+                        var duplicate = false;
+                        for (var i = 0; i < this.themes.length; i++) {
+                            if (this.themes[i].name == params.name) {
+                                this.themes[i].settings = params.settings;
+                                duplicate = true;
+                            }
+                        }
+                        if (!duplicate)
+                            this.themes.push(params);
+                    }
+                    else
+                        console.error("Please name your custom theme.");
+                };
+                ;
                 __decorate([
                     core_1.ViewChild(chart_component_1.ChartComponent), 
                     __metadata('design:type', chart_component_1.ChartComponent)
                 ], ChartUI.prototype, "chartComponent", void 0);
+                __decorate([
+                    core_1.ViewChild(theme_dialog_component_1.ThemeDialog), 
+                    __metadata('design:type', theme_dialog_component_1.ThemeDialog)
+                ], ChartUI.prototype, "themeDialog", void 0);
                 ChartUI = __decorate([
                     core_1.Component({
                         selector: 'chart-ui',
                         styleUrls: ['app/ui_component/ui.component.css'],
                         templateUrl: 'app/ui_component/ui.component.html',
-                        directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog],
+                        directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog, theme_dialog_component_1.ThemeDialog, colorpicker_1.Colorpicker],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     }), 
                     __metadata('design:paramtypes', [core_1.NgZone])

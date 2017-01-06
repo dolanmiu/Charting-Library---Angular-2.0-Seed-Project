@@ -7,6 +7,12 @@
 			</div>
 		</div>
 	</div>
+	<div id="themeSelect">
+		<span>Select Theme</span>
+		<div class="menu-hover">
+			<div class="option" *ngFor="#theme of themes" (click)="handleThemeSelect(theme)"><span>{{theme.name}}</span></div>
+		</div>
+	</div>
 	<input [(ngModel)]="symbolInput">
 	<button (click)=changeSymbol()>Change Symbol</button>
 	<div id="periodicitySelect">
@@ -30,4 +36,6 @@
 	<button (click)="addComparison()">Add Comparison</button>
 	<chart #chartComponent></chart>
 	<study-dialog #studyDialog [(launchDialog)]="launchDialog"></study-dialog>
+	<theme-dialog #themeDialog (themeToPush)="updateThemeList($event)" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></theme-dialog>
+	<colorpicker #colorpicker (setSwatchColor)="themeDialog.setColorFromPicker($event)"></colorpicker>
 </chart-ui>
