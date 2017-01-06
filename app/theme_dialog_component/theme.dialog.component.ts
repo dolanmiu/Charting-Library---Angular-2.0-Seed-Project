@@ -31,8 +31,6 @@ export class ThemeDialog{
 		this.zone.run(()=> {
 			this.themeHelper.settings = theme.settings;
 			this.themeHelper.update();
-			console.log(theme.settings);
-			console.log(this.themeHelper.settings);
 		});
 	}
 
@@ -42,7 +40,6 @@ export class ThemeDialog{
 				this.themeHelper.settings.chartTypes["Candle/Bar"].up.color=CIQ.hexToRgba('#'+color);
 				break;
 			case 'candleDown':
-				console.log('in candle down');
 				this.themeHelper.settings.chartTypes["Candle/Bar"].down.color=CIQ.hexToRgba('#'+color);
 				break;
 			case 'wickUp':
