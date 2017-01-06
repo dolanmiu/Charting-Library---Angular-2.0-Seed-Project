@@ -2,6 +2,7 @@ import {Component, ViewChild, AfterViewChecked, ChangeDetectionStrategy, NgZone}
 import {ChartComponent} from '../chart_component/chart.component'
 import {StudyDialog} from '../study_dialog_component/study.dialog.component'
 import {ThemeDialog} from '../theme_dialog_component/theme.dialog.component'
+import {TimezoneDialog} from '../timezone_dialog_component/timezone.dialog.component'
 import {Colorpicker} from '../colorpicker_component/colorpicker'
 
 declare var CIQ: any;
@@ -10,7 +11,7 @@ declare var CIQ: any;
     selector: 'chart-ui',
 	styleUrls:['app/ui_component/ui.component.css'],
     templateUrl: 'app/ui_component/ui.component.html',
-	directives:[ChartComponent, StudyDialog, ThemeDialog, Colorpicker],
+	directives:[ChartComponent, StudyDialog, ThemeDialog, TimezoneDialog, Colorpicker],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -90,7 +91,6 @@ export class ChartUI implements AfterViewChecked {
 			this.themeDialog.showDialog(this.chartComponent.ciq);
 		}
 		else{
-			console.log(theme);
 			this.themeDialog.updateTheme(theme);
 		}
 	}

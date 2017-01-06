@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../chart_component/chart.component', '../study_dialog_component/study.dialog.component', '../theme_dialog_component/theme.dialog.component', '../colorpicker_component/colorpicker'], function(exports_1, context_1) {
+System.register(['angular2/core', '../chart_component/chart.component', '../study_dialog_component/study.dialog.component', '../theme_dialog_component/theme.dialog.component', '../timezone_dialog_component/timezone.dialog.component', '../colorpicker_component/colorpicker'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, chart_component_1, study_dialog_component_1, theme_dialog_component_1, colorpicker_1;
+    var core_1, chart_component_1, study_dialog_component_1, theme_dialog_component_1, timezone_dialog_component_1, colorpicker_1;
     var ChartUI;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
             },
             function (theme_dialog_component_1_1) {
                 theme_dialog_component_1 = theme_dialog_component_1_1;
+            },
+            function (timezone_dialog_component_1_1) {
+                timezone_dialog_component_1 = timezone_dialog_component_1_1;
             },
             function (colorpicker_1_1) {
                 colorpicker_1 = colorpicker_1_1;
@@ -304,7 +307,6 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
                         this.themeDialog.showDialog(this.chartComponent.ciq);
                     }
                     else {
-                        console.log(theme);
                         this.themeDialog.updateTheme(theme);
                     }
                 };
@@ -337,7 +339,7 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
                         selector: 'chart-ui',
                         styleUrls: ['app/ui_component/ui.component.css'],
                         templateUrl: 'app/ui_component/ui.component.html',
-                        directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog, theme_dialog_component_1.ThemeDialog, colorpicker_1.Colorpicker],
+                        directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog, theme_dialog_component_1.ThemeDialog, timezone_dialog_component_1.TimezoneDialog, colorpicker_1.Colorpicker],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush,
                     }), 
                     __metadata('design:paramtypes', [core_1.NgZone])

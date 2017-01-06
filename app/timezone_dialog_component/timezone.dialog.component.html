@@ -1,0 +1,6 @@
+<div id="timezoneDialog" *ngIf="launchDialog | async">
+	<div class="content">
+		<div *ngFor="#zone of timezones" (click)="setTimezone(zone);">{{zone}}</div>
+		<button (click)="closeMe();">Done</button>
+	</div>
+</div>
