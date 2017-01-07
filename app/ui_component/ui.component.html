@@ -36,8 +36,8 @@
 	<input [(ngModel)]="symbolComparison">
 	<button (click)="addComparison()">Add Comparison</button>
 	<chart #chartComponent></chart>
-	<study-dialog #studyDialog [(launchDialog)]="launchDialog"></study-dialog>
+	<study-dialog #studyDialog [(launchDialog)]="launchDialog" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></study-dialog>
 	<theme-dialog #themeDialog (themeToPush)="updateThemeList($event)" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></theme-dialog>
 	<timezone-dialog #timezoneDialog></timezone-dialog>
-	<colorpicker #colorpicker (setSwatchColor)="themeDialog.setColorFromPicker($event)"></colorpicker>
+	<colorpicker #colorpicker (setThemeSwatchColor)="themeDialog.setColorFromPicker($event)" (setStudySwatchColor)="studyDialog.setColorFromPicker($event)"></colorpicker>
 </chart-ui>

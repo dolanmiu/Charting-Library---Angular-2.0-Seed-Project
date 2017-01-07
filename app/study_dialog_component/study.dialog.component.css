@@ -1,6 +1,4 @@
-#studyDialog,
-#themeDialog,
-#timezoneDialog{
+#studyDialog{
 	position:fixed;
 	z-index:31; /* The zoom buttons have a z-index of 30 */
 	left:0;
@@ -18,34 +16,12 @@
 	top:0;
 }
 
-#studyDialog div.content,
-#timezoneDialog div.content{
+#studyDialog div.content{
 	background-color:#fefefe;
 	margin:15% auto;
 	padding:20px;
 	border:1px solid #888;
 	width:35%;
-}
-
-#themeDialog div.content{
-	background-color:#fefefe;
-	margin:15% auto;
-	padding:20px;
-	border:1px solid #888;
-	width:20%;
-}
-
-#themeDialog .color,
-#themeDialog .wick,
-#themeDialog .border,
-#themeDialog .lineBarChart,
-#themeDialog .colors,
-#themeDialog .mountainChart,
-#themeDialog .background,
-#themeDialog .gridLines,
-#themeDialog .dateDividers,
-#themeDialog .axisText{
-	margin-bottom:1em;
 }
 
 .content div.inputs,
@@ -68,19 +44,10 @@
 .inputs input,
 .inputs select,
 .outputs .output,
-.parameters .param,
-#themeDialog .color-picker-swatch{
+.parameters .param{
 	float:right;
 	margin-right:1em;
 	cursor: pointer;
-}
-
-#themeDialog .theme-field-name{
-	display: inline;
-}
-
-#themeDialog .theme-save{
-	text-align: center;
 }
 
 .parameters input{
@@ -105,43 +72,4 @@
 	height:20px;
 	width:20px;
 	border:1px solid black;
-}
-.color-picker-options {/* This is the actual color picker container */
-	position:absolute;
-	background:#FFF;
-	width:180px;
-	margin:20px 0 0 0;
-	padding:10px 5px 5px 10px;
-	border:1px solid #ccc;
-	border-radius:3px;
-	box-shadow:0 1px 5px 0 rgba(0,0,0,.5);
-}
-.color-picker-options ul { /* The unordered list with all the swatches */
-	margin:0;
-	padding:0;
-	list-style-type:none;
-	zoom:1;
-}
-.color-picker-options ul:after { /* Fix display in some browsers */
-	content:".";
-	display:block;
-	height:0;
-	visibility:hidden;
-	clear:both;
-}
-.color-picker-options ul li { /* List item containing each swatch */
-	float:left;
-	margin:0 5px 5px 0;
-}
-.color-picker-options ul li a { /* The swatches themselves */
-	display:block;
-	width:13px;
-	height:13px;
-	text-decoration:none;
-	text-indent:-100000px;
-	outline:0;
-	border:1px solid #aaa;
-}
-.color-picker-options ul li a:hover {/* Swatch hover state */
-	border-color:#000;
 }

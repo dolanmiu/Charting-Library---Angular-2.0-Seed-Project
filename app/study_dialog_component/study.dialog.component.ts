@@ -18,7 +18,9 @@ export class StudyDialog{
 	parameters:any;
 	studyId:any;
 	studyName:any;
+	activeOutput:any={};
 	@Output() launchDialog=new EventEmitter<any>();
+	@Output() launchColorpickerEvent=new EventEmitter<any>();
 
 	constructor(){
 		this.zone = new NgZone({enableLongStackTrace: false});
@@ -46,6 +48,36 @@ export class StudyDialog{
 			this.launchDialog.emit(true);
 		});
 	};
+
+	updateStudyHelperColors(color, params){
+		for (let x in this.studyHelper.outputs) {
+			if (this.studyHelper.outputs.hasOwnProperty(x)) {
+				if (this.studyHelper.outputs[x].name == params.name) {
+					this.studyHelper.outputs[x].color = '#' + color;
+				}
+			}
+		}
+		for (let y in this.studyHelper.parameters) {
+			if (this.studyHelper.parameters.hasOwnProperty(y)) {
+				if (this.studyHelper.parameters[y].name == params.name) {
+					this.studyHelper.parameters[y].color = '#' + color;
+				}
+			}
+		}
+	};
+
+	launchColorpicker(setting, event){
+		this.activeOutput['div']=event.target;
+		this.launchColorpickerEvent.emit({
+			swatch: event.target,
+			setting:setting
+		});
+	}
+
+	setColorFromPicker(params){
+		this.updateStudyHelperColors(params.color, params.params);
+		this.activeOutput.div.style.backgroundColor=CIQ.hexToRgba('#'+params.color);
+	}
 
 	removeStudy=function(args){
 		CIQ.Studies.removeStudy(args.stx,args.sd);

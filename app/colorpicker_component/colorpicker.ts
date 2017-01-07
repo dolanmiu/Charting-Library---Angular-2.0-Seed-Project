@@ -12,8 +12,10 @@ export class Colorpicker{
 	posLeft:any=0;
 	posTop:any=0;
 	caller:any=false;
+	parent:any=false;
 	launch:any=false;
-	@Output() setSwatchColor:EventEmitter<any>=new EventEmitter();
+	@Output() setThemeSwatchColor:EventEmitter<any>=new EventEmitter();
+	@Output() setStudySwatchColor:EventEmitter<any>=new EventEmitter();
 
 
 	constructor(public element:ElementRef){}
@@ -21,7 +23,9 @@ export class Colorpicker{
 	setColor=function(params){
 		var that=this;
 		return function() {
-			that.setSwatchColor.emit({color:arguments[0], source:that.caller, params:params});
+			if(that.parent=="outputs" || that.parent=="inputs" || that.parent=="parameters")
+				that.setStudySwatchColor.emit({color:arguments[0], source:that.caller, params:params});
+			else that.setThemeSwatchColor.emit({color:arguments[0], source:that.caller, params:params});
 			that.closeMe();
 		};
 	};
@@ -40,6 +44,7 @@ export class Colorpicker{
 		this.posTop=(clicked.offsetTop - 550) + "px";
 
 		this.caller=clicked;
+		this.parent=params.swatch.parentNode.className;
 		this.launch=true;
 	}
 

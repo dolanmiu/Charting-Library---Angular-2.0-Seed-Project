@@ -1,6 +1,5 @@
-#studyDialog,
-#themeDialog,
-#timezoneDialog{
+
+#themeDialog{
 	position:fixed;
 	z-index:31; /* The zoom buttons have a z-index of 30 */
 	left:0;
@@ -16,15 +15,6 @@
 	z-index:32;
 	left:0;
 	top:0;
-}
-
-#studyDialog div.content,
-#timezoneDialog div.content{
-	background-color:#fefefe;
-	margin:15% auto;
-	padding:20px;
-	border:1px solid #888;
-	width:35%;
 }
 
 #themeDialog div.content{
@@ -65,10 +55,6 @@
 	text-align:center;
 }
 
-.inputs input,
-.inputs select,
-.outputs .output,
-.parameters .param,
 #themeDialog .color-picker-swatch{
 	float:right;
 	margin-right:1em;
