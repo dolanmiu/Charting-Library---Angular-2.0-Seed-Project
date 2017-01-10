@@ -1,10 +1,10 @@
-import {Component, NgZone, Output, EventEmitter} from 'angular2/core'
+import {Component, Output, EventEmitter} from 'angular2/core'
 
 declare var CIQ: any;
 
 @Component({
 	selector: 'timezone-dialog',
-	styleUrls:['app/timezone_dialog_component/timezone.dialog.component.css'],
+	styleUrls:['app/css/CIQ_Seed.css'],
 	templateUrl: 'app/timezone_dialog_component/timezone.dialog.component.html',
 })
 
@@ -29,6 +29,10 @@ export class TimezoneDialog{
 	setTimezone(zone){
 		this.ciq.setTimeZone(this.ciq.dataZone, zone);
 		if(this.ciq.chart.symbol) this.ciq.draw();
+		this.launchDialog.emit(false);
+	};
+
+	closeMe=function(){
 		this.launchDialog.emit(false);
 	};
 }

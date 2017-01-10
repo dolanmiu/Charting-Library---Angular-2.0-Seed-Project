@@ -1,43 +1,46 @@
-<chart-ui #uiComponent>
-	<div id="studySelect">
-		<span>{{studies.selectedOption || "Add Study"}}</span>
-		<div class="menu-hover">
-			<div class="option" *ngFor="#study of studies.list" (click)="studyDialog.addStudy(study, chartComponent.ciq)">
-				{{study}}
-			</div>
-		</div>
+<nav class="ciq">
+	<div class="example3">
+		<menu-select class="ciq" id="studySelect">
+			<span>{{studies.selectedOption || "Add Study"}}</span>
+			<menu-select-options>
+				<menu-option *ngFor="#study of studies.list" (click)="studyDialog.addStudy(study, chartComponent.ciq)">
+					{{study}}
+				</menu-option>
+			</menu-select-options>
+		</menu-select>
+		<menu-select class="ciq" id="themeSelect">
+			<span>Select Theme</span>
+			<menu-select-options class="menu-hover">
+				<menu-option *ngFor="#theme of themes" (click)="handleThemeSelect(theme)"><span>{{theme.name}}</span></menu-option>
+			</menu-select-options>
+		</menu-select>
+		<button class="ciq timezone-btn" (click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)">Select Timezone</button>
 	</div>
-	<div id="themeSelect">
-		<span>Select Theme</span>
-		<div class="menu-hover">
-			<div class="option" *ngFor="#theme of themes" (click)="handleThemeSelect(theme)"><span>{{theme.name}}</span></div>
-		</div>
+	<div class="example2">
+		<input id="symbolInput" placeholder="Set Symbol" type="text" [(ngModel)]="symbolInput"><button class="ciq symbol-btn" (click)=changeSymbol()></button>
+		<menu-select class="ciq" id="periodicitySelect">
+			<span>{{periodicity}}</span>
+			<menu-select-options class="menu-hover">
+			    <menu-option *ngFor="#period of periodicityOptions" (click)="changePeriodicity(period.period, period.interval)">
+			        {{period.label}}
+			    </menu-option>
+			</menu-select-options>
+		</menu-select>
+		<menu-select class="ciq" id="chartTypeSelect">
+			<span>{{chartType}}</span>
+			<menu-select-options class="menu-hover">
+				<menu-option *ngFor="#type of chartTypes" (click)="changeChartType(type)">
+					{{type.label}}
+				</menu-option>
+			</menu-select-options>
+		</menu-select>
+		<input id="symbolCompareInput" placeholder="Add Comparison" type="text" [(ngModel)]="symbolComparison"><button class="ciq comparison-btn" (click)="addComparison()"></button>
+		<button class="ciq crosshair-btn" (click)="toggleCrosshairs()">Crosshairs</button>
 	</div>
-	<button (click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)">Select Timezone</button>
-	<input [(ngModel)]="symbolInput">
-	<button (click)=changeSymbol()>Change Symbol</button>
-	<div id="periodicitySelect">
-		<span>{{periodicity}}</span>
-		<div class="menu-hover">
-		    <div class="option" *ngFor="#period of periodicityOptions" (click)="changePeriodicity(period.period, period.interval)">
-		        {{period.label}}
-		    </div>
-		</div>
-	</div>
-	<div id="chartTypeSelect">
-		<span>{{chartType}}</span>
-		<div class="menu-hover">
-			<div class="option" *ngFor="#type of chartTypes" (click)="changeChartType(type)">
-				{{type.label}}
-			</div>
-		</div>
-	</div>
-	<button (click)="toggleCrosshairs()">Crosshairs</button>
-	<input [(ngModel)]="symbolComparison">
-	<button (click)="addComparison()">Add Comparison</button>
-	<chart #chartComponent></chart>
-	<study-dialog #studyDialog [(launchDialog)]="launchDialog" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></study-dialog>
-	<theme-dialog #themeDialog (themeToPush)="updateThemeList($event)" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></theme-dialog>
-	<timezone-dialog #timezoneDialog></timezone-dialog>
-	<colorpicker #colorpicker (setThemeSwatchColor)="themeDialog.setColorFromPicker($event)" (setStudySwatchColor)="studyDialog.setColorFromPicker($event)"></colorpicker>
-</chart-ui>
+</nav>
+<!-- The components -->
+<chart #chartComponent></chart>
+<study-dialog #studyDialog [(launchDialog)]="launchDialog" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></study-dialog>
+<theme-dialog #themeDialog (themeToPush)="updateThemeList($event)" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></theme-dialog>
+<timezone-dialog #timezoneDialog></timezone-dialog>
+<colorpicker #colorpicker (setThemeSwatchColor)="themeDialog.setColorFromPicker($event)" (setStudySwatchColor)="studyDialog.setColorFromPicker($event)"></colorpicker>

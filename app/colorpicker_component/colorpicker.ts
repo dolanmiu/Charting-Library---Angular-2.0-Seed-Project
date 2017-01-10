@@ -4,7 +4,7 @@ declare var CIQ: any;
 
 @Component({
 	selector: 'colorpicker',
-	styleUrls:['app/colorpicker_component/colorpicker.css'],
+	styleUrls:['app/css/CIQ_Seed.css'],
 	templateUrl: 'app/colorpicker_component/colorpicker.html',
 })
 
@@ -41,7 +41,7 @@ export class Colorpicker{
 		var clicked=params.swatch;
 
 		this.posLeft=(clicked.offsetLeft + 10) +"px";
-		this.posTop=(clicked.offsetTop - 550) + "px";
+		this.posTop=(clicked.offsetTop - 650) + "px";
 
 		this.caller=clicked;
 		this.parent=params.swatch.parentNode.className;

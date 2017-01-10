@@ -9,9 +9,11 @@ html, body, div, span {
 }
 
 #chartContainer{
-	width:800px;
+	width:875px;
 	height:500px;
 	position:relative;
+	margin: 0 auto;
+	left:23; /* need to offset a little in this case to line up with the nav */
 }
 
 div.chartSeries{
@@ -36,6 +38,7 @@ div.deleteSeries {
 	position:absolute;
 	left:70px;
 	z-index:21; /* minimum z-index to be over the chart so it's click-able */
+	cursor: hand;
 }
 
 div.comparisonWrapper{
