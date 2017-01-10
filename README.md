@@ -8,7 +8,7 @@ A copy of the ChartIQ library. To get your copy, visit https://www.chartiq.com/p
 
 ## Getting started
 
-Create two sym links to the ChartIQ library js and css folders within the chartiq_library directory provided here.
+Create two sym links to the ChartIQ library js and css folders within a chartiq_library directory. The new file structure addition should be "chartiq_library/js" and "chartiq_library/css"
 
 ```npm intstall```
 
