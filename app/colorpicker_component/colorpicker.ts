@@ -23,7 +23,7 @@ export class Colorpicker{
 	setColor=function(params){
 		var that=this;
 		return function() {
-			if(that.parent=="outputs" || that.parent=="inputs" || that.parent=="parameters")
+			if(that.parent=="output" || that.parent=="input" || that.parent=="parameter")
 				that.setStudySwatchColor.emit({color:arguments[0], source:that.caller, params:params});
 			else that.setThemeSwatchColor.emit({color:arguments[0], source:that.caller, params:params});
 			that.closeMe();
@@ -44,7 +44,7 @@ export class Colorpicker{
 		this.posTop=(clicked.offsetTop - 650) + "px";
 
 		this.caller=clicked;
-		this.parent=params.swatch.parentNode.className;
+		this.parent=params.swatch.parentNode.classList[0];
 		this.launch=true;
 	}
 

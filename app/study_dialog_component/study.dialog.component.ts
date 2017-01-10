@@ -5,7 +5,7 @@ declare var CIQ: any;
 
 @Component({
 	selector: 'study-dialog',
-	styleUrls:['app/css/CIQ_Seed.css'],
+	styleUrls:['app/css/CIQ_Seed.css', 'app/css/CIQ_Demo.css'],
 	templateUrl: 'app/study_dialog_component/study.dialog.component.html',
 	pipes:[FilterByPropertyPipe]
 })
