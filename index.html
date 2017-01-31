@@ -15,22 +15,8 @@
 		<link rel="stylesheet" href="chartiq_library/css/stx-chart.css">
 		<link rel="stylesheet" href="app/css/CIQ_Seed.css">
 
-		<!-- The ChartIQ library -->
-		<script src="chartiq_library/js/thirdparty/excanvas.js"></script>
-		<script src="chartiq_library/js/thirdparty/ie8.js"></script>
-		<script src="chartiq_library/js/thirdparty/iscroll.js"></script>
-		<script src="chartiq_library/js/thirdparty/object-observe.js"></script>
-		<script src="chartiq_library/js/thirdparty/perfect-scrollbar.jquery.js"></script>
-		<script src="chartiq_library/js/thirdparty/splines.js"></script>
-		<script src="chartiq_library/js/thirdparty/webcomponents-lite.min.js"></script>
-		<script src="chartiq_library/js/chartiq.js"></script>
-		<script src="chartiq_library/js/plugin.js"></script>
-		<script src="chartiq_library/js/quoteFeedBarChart.js"></script>
-		<script src="chartiq_library/js/quoteFeedSamples.js"></script>
-		<script src="chartiq_library/js/quoteFeedSimulator.js"></script>
-		<script src="chartiq_library/js/quoteFeedXignite.js"></script>
-		<script src="chartiq_library/js/translations.js"></script>
-		<script src="chartiq_library/js/addOns.js"></script>
+		<!-- Import our app -->
+		<script src='require.js'></script>
 
 	    <!-- 2. Configure SystemJS -->
 	    <script>
@@ -49,10 +35,10 @@
 
 	<!-- 3. Display the application -->
 	<body class="ciq">
-		<header class="ciq">
+		<!--<header class="ciq">
 			<img src="img/CIQ_Logo.svg" class="ciq logo">
 			<span>Angular 2.0 Seed Project</span>
-		</header>
+		</header>-->
 		<my-app>Loading...</my-app>
 	</body>
 
