@@ -1,6 +1,5 @@
-System.register(['angular2/core', '../chart_component/chart.component', '../study_dialog_component/study.dialog.component', '../theme_dialog_component/theme.dialog.component', '../timezone_dialog_component/timezone.dialog.component', '../colorpicker_component/colorpicker'], function(exports_1, context_1) {
+System.register(["angular2/core", "../chart_component/chart.component", "../study_dialog_component/study.dialog.component", "../theme_dialog_component/theme.dialog.component", "../timezone_dialog_component/timezone.dialog.component", "../colorpicker_component/colorpicker"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, chart_component_1, study_dialog_component_1, theme_dialog_component_1, timezone_dialog_component_1, colorpicker_1;
-    var ChartUI;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, chart_component_1, study_dialog_component_1, theme_dialog_component_1, timezone_dialog_component_1, colorpicker_1, ChartUI, _a;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -31,8 +30,9 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
             },
             function (colorpicker_1_1) {
                 colorpicker_1 = colorpicker_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             ChartUI = (function () {
                 function ChartUI(zone) {
                     this.zone = zone;
@@ -249,14 +249,10 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
                 ChartUI.prototype.changePeriodicity = function (period, interval) {
                     var _this = this;
                     this.chartComponent.ciq.setPeriodicityV2(period, interval);
-                    var _loop_1 = function(i) {
-                        if (this_1.periodicityOptions[i].interval == this_1.chartLayout.interval && this_1.periodicityOptions[i].period == this_1.chartLayout.periodicity) {
-                            this_1.zone.run(function () { _this.periodicity = _this.periodicityOptions[i].label; });
-                        }
-                    };
-                    var this_1 = this;
                     for (var i in this.periodicityOptions) {
-                        _loop_1(i);
+                        if (this.periodicityOptions[i].interval == this.chartLayout.interval && this.periodicityOptions[i].period == this.chartLayout.periodicity) {
+                            this.zone.run(function () { _this.periodicity = _this.periodicityOptions[i].label; });
+                        }
                     }
                 };
                 ChartUI.prototype.changeChartType = function (type) {
@@ -326,28 +322,28 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
                         console.error("Please name your custom theme.");
                 };
                 ;
-                __decorate([
-                    core_1.ViewChild(chart_component_1.ChartComponent), 
-                    __metadata('design:type', chart_component_1.ChartComponent)
-                ], ChartUI.prototype, "chartComponent", void 0);
-                __decorate([
-                    core_1.ViewChild(theme_dialog_component_1.ThemeDialog), 
-                    __metadata('design:type', theme_dialog_component_1.ThemeDialog)
-                ], ChartUI.prototype, "themeDialog", void 0);
-                ChartUI = __decorate([
-                    core_1.Component({
-                        selector: 'chart-ui',
-                        styleUrls: ['app/css/CIQ_Seed.css', 'app/css/CIQ_Demo.css'],
-                        templateUrl: 'app/ui_component/ui.component.html',
-                        directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog, theme_dialog_component_1.ThemeDialog, timezone_dialog_component_1.TimezoneDialog, colorpicker_1.Colorpicker],
-                        changeDetection: core_1.ChangeDetectionStrategy.OnPush,
-                    }), 
-                    __metadata('design:paramtypes', [core_1.NgZone])
-                ], ChartUI);
                 return ChartUI;
             }());
+            __decorate([
+                core_1.ViewChild(chart_component_1.ChartComponent),
+                __metadata("design:type", chart_component_1.ChartComponent)
+            ], ChartUI.prototype, "chartComponent", void 0);
+            __decorate([
+                core_1.ViewChild(theme_dialog_component_1.ThemeDialog),
+                __metadata("design:type", theme_dialog_component_1.ThemeDialog)
+            ], ChartUI.prototype, "themeDialog", void 0);
+            ChartUI = __decorate([
+                core_1.Component({
+                    selector: 'chart-ui',
+                    styleUrls: ['app/css/CIQ_Seed.css', 'app/css/CIQ_Demo.css'],
+                    templateUrl: 'app/ui_component/ui.component.html',
+                    directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog, theme_dialog_component_1.ThemeDialog, timezone_dialog_component_1.TimezoneDialog, colorpicker_1.Colorpicker],
+                    changeDetection: core_1.ChangeDetectionStrategy.OnPush,
+                }),
+                __metadata("design:paramtypes", [typeof (_a = typeof core_1.NgZone !== "undefined" && core_1.NgZone) === "function" && _a || Object])
+            ], ChartUI);
             exports_1("ChartUI", ChartUI);
         }
-    }
+    };
 });
 //# sourceMappingURL=ui.component.js.map

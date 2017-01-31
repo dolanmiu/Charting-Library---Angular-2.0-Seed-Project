@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var ChartService;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             ChartService = (function () {
                 function ChartService() {
                     // To implement your own quotefeed and see other methods of data loading, check out our tutorial: http://documentation.chartiq.com/tutorial-Data%20Loading.html
@@ -21,6 +21,6 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("ChartService", ChartService);
         }
-    }
+    };
 });
 //# sourceMappingURL=chart.service.js.map

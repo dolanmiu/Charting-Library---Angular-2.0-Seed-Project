@@ -1,6 +1,5 @@
-System.register(['angular2/core', '../chart_service/chart.service'], function(exports_1, context_1) {
+System.register(["angular2/core", "../chart_service/chart.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,17 +9,18 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, chart_service_1;
-    var ChartComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, chart_service_1, ChartComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (chart_service_1_1) {
                 chart_service_1 = chart_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             ChartComponent = (function () {
                 function ChartComponent(chartService) {
                     this.chartService = chartService;
@@ -43,19 +43,19 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
                     }
                     this.ciq.removeSeries(series.display, this.ciq.ciq);
                 };
-                ChartComponent = __decorate([
-                    core_1.Component({
-                        selector: 'chart',
-                        styleUrls: ['app/chart_component/chart.component.css'],
-                        templateUrl: 'app/chart_component/chart.component.html',
-                        providers: [chart_service_1.ChartService]
-                    }), 
-                    __metadata('design:paramtypes', [chart_service_1.ChartService])
-                ], ChartComponent);
                 return ChartComponent;
             }());
+            ChartComponent = __decorate([
+                core_1.Component({
+                    selector: 'chart',
+                    styleUrls: ['app/chart_component/chart.component.css'],
+                    templateUrl: 'app/chart_component/chart.component.html',
+                    providers: [chart_service_1.ChartService]
+                }),
+                __metadata("design:paramtypes", [chart_service_1.ChartService])
+            ], ChartComponent);
             exports_1("ChartComponent", ChartComponent);
         }
-    }
+    };
 });
 //# sourceMappingURL=chart.component.js.map
