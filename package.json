@@ -1,39 +1,38 @@
-{
-  "name": "chartiq-angular2",
-  "version": "1.0.0",
-  "scripts": {
-    "start": "npm run lite",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "lite": "lite-server",
-    "typings": "typings",
-    "prestart": "typings install & tsc",
-    "debug": "concurrent \"npm run tsc:w\" \"npm run lite\""
-  },
-  "license": "ISC",
-  "dependencies": {
-    "@types/core-js": "^0.9.35",
-    "@angular/common": "~2.1.0",
-    "@angular/compiler": "~2.1.0",
-    "@angular/core": "~2.1.0",
-    "@angular/forms": "~2.1.0",
-    "@angular/http": "~2.1.0",
-    "@angular/platform-browser": "~2.1.0",
-    "@angular/platform-browser-dynamic": "~2.1.0",
-    "@angular/router": "~3.1.0",
-    "@angular/upgrade": "~2.1.0",
-    "angular2": "2.0.0-beta.7",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "systemjs": "0.19.22",
-    "typescript": "^1.8.10",
-    "typings": "^2.1.0",
-    "zone.js": "0.5.15"
-  },
-  "devDependencies": {
-    "concurrently": "^2.0.0",
-    "lite-server": "^2.1.0"
-  }
+  {
+    "name": "chartiq-angular2",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "npm run lite",
+      "tsc": "tsc",
+      "tsc:w": "tsc -w",
+      "lite": "lite-server",
+      "typings": "typings",
+      "prestart": "typings install & tsc",
+      "debug": "concurrent \"npm run tsc:w\" \"npm run lite\""
+    },
+    "license": "ISC",
+    "dependencies": {
+      "@angular/common": "~2.1.0",
+      "@angular/compiler": "~2.1.0",
+      "@angular/core": "~2.1.0",
+      "@angular/forms": "~2.1.0",
+      "@angular/http": "~2.1.0",
+      "@angular/platform-browser": "~2.1.0",
+      "@angular/platform-browser-dynamic": "~2.1.0",
+      "@angular/router": "~3.1.0",
+      "@angular/upgrade": "~2.1.0",
+      "angular2": "2.0.0-beta.7",
+      "es6-promise": "^3.0.2",
+      "es6-shim": "^0.33.3",
+      "reflect-metadata": "0.1.2",
+      "rxjs": "5.0.0-beta.2",
+      "systemjs": "0.19.22",
+      "typescript": "^1.8.10",
+      "typings": "^2.1.0",
+      "zone.js": "0.5.15"
+    },
+    "devDependencies": {
+      "concurrently": "^2.0.0",
+      "lite-server": "^2.1.0"
+    }
 }
