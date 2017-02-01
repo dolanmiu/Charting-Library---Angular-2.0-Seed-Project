@@ -10,9 +10,6 @@
     "noImplicitAny": false
   },
   "files": [
-    "node_modules/typescript/lib/lib.es6.d.ts"
-  ],
-  "include": [
     "app/chart_component/chart.component.ts",
     "app/chart_service/chart.service.ts",
     "app/colorpicker_component/colorpicker.ts",
@@ -20,9 +17,10 @@
     "app/study_dialog_component/study.dialog.component.ts",
     "app/theme_dialog_component/theme.dialog.component.ts",
     "app/timezone_dialog_component/timezone.dialog.component.ts",
-    "app/ui_compnent/ui.component.ts",
+    "app/ui_component/ui.component.ts",
     "app/app.component.ts",
-    "app/boot.ts"
+    "app/boot.ts",
+    "node_modules/typescript/lib/lib.es6.d.ts"
   ],
   "exclude": [
     "node_modules",
