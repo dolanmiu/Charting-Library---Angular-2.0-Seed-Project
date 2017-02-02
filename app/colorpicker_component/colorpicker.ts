@@ -4,7 +4,7 @@ declare var CIQ: any;
 
 @Component({
 	selector: 'colorpicker',
-	styleUrls:['app/css/CIQ_Seed.css'],
+	styleUrls:['app/css/stylesheets/CIQ_Seed.css', 'app/css/stylesheets/CIQ_Demo.css'],
 	templateUrl: 'app/colorpicker_component/colorpicker.html',
 })
 

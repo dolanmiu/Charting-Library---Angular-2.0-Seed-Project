@@ -4,7 +4,7 @@ declare var CIQ: any;
 
 @Component({
 	selector: 'timezone-dialog',
-	styleUrls:['app/css/CIQ_Seed.css'],
+	styleUrls:['app/css/stylesheets/CIQ_Seed.css', 'app/css/stylesheets/CIQ_Demo.css'],
 	templateUrl: 'app/timezone_dialog_component/timezone.dialog.component.html',
 })
 

@@ -30,7 +30,8 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
                 ChartComponent.prototype.ngOnInit = function () {
                     this.ciq = new CIQ.ChartEngine({ container: $$$("#chartContainer") });
                     this.ciq.setPeriodicityV2(1, 5);
-                    this.chartService.attachQuoteFeed(this.ciq);
+                    var qf = this.chartService.makeFeed();
+                    this.ciq.attachQuoteFeed(qf, { refreshInterval: 1 });
                     this.ciq.newChart("IBM");
                 };
                 ChartComponent.prototype.getLayout = function () {
@@ -46,7 +47,7 @@ System.register(['angular2/core', '../chart_service/chart.service'], function(ex
                 ChartComponent = __decorate([
                     core_1.Component({
                         selector: 'chart',
-                        styleUrls: ['app/chart_component/chart.component.css'],
+                        styleUrls: ['app/css/stylesheets/CIQ_Seed.css', 'app/css/stylesheets/CIQ_Demo.css'],
                         templateUrl: 'app/chart_component/chart.component.html',
                         providers: [chart_service_1.ChartService]
                     }), 

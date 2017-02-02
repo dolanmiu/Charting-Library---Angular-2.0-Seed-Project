@@ -337,7 +337,7 @@ System.register(['angular2/core', '../chart_component/chart.component', '../stud
                 ChartUI = __decorate([
                     core_1.Component({
                         selector: 'chart-ui',
-                        styleUrls: ['app/css/CIQ_Seed.css', 'app/css/CIQ_Demo.css'],
+                        styleUrls: ['app/css/stylesheets/CIQ_Seed.css', 'app/css/stylesheets/CIQ_Demo.css'],
                         templateUrl: 'app/ui_component/ui.component.html',
                         directives: [chart_component_1.ChartComponent, study_dialog_component_1.StudyDialog, theme_dialog_component_1.ThemeDialog, timezone_dialog_component_1.TimezoneDialog, colorpicker_1.Colorpicker],
                         changeDetection: core_1.ChangeDetectionStrategy.OnPush,

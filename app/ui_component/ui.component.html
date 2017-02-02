@@ -1,45 +1,59 @@
-<nav class="ciq">
-	<div class="example3">
-		<menu-select class="ciq" id="studySelect">
-			<span>{{studies.selectedOption || "Add Study"}}</span>
-			<menu-select-options>
-				<menu-option *ngFor="#study of studies.list" (click)="studyDialog.addStudy(study, chartComponent.ciq)">
-					{{study}}
+<nav class="ciq-nav">
+	<div class="left">
+		<input id="symbolInput" placeholder="Set Symbol" type="text" [(ngModel)]="symbolInput"><button class="ciq symbol-btn" (click)=changeSymbol()></button>
+	</div>
+	<div class="right">
+		<menu-select class="ciq" id="periodicitySelect">
+			<span class="title">{{periodicity}}</span>
+			<menu-select-options class="menu-hover">
+				<menu-option *ngFor="#period of periodicityOptions" (click)="changePeriodicity(period.period, period.interval)">
+					{{period.label}}
 				</menu-option>
 			</menu-select-options>
 		</menu-select>
-		<menu-select class="ciq" id="themeSelect">
-			<span>Select Theme</span>
-			<menu-select-options class="menu-hover">
-				<menu-option *ngFor="#theme of themes" (click)="handleThemeSelect(theme)"><span>{{theme.name}}</span></menu-option>
-			</menu-select-options>
-		</menu-select>
-		<button class="ciq timezone-btn" (click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)">Select Timezone</button>
-	</div>
-	<div class="example2">
-		<input id="symbolInput" placeholder="Set Symbol" type="text" [(ngModel)]="symbolInput"><button class="ciq symbol-btn" (click)=changeSymbol()></button>
-		<menu-select class="ciq" id="periodicitySelect">
-			<span>{{periodicity}}</span>
-			<menu-select-options class="menu-hover">
-			    <menu-option *ngFor="#period of periodicityOptions" (click)="changePeriodicity(period.period, period.interval)">
-			        {{period.label}}
-			    </menu-option>
-			</menu-select-options>
-		</menu-select>
 		<menu-select class="ciq" id="chartTypeSelect">
-			<span>{{chartType}}</span>
+			<span class="title">{{chartType}}</span>
 			<menu-select-options class="menu-hover">
 				<menu-option *ngFor="#type of chartTypes" (click)="changeChartType(type)">
 					{{type.label}}
 				</menu-option>
 			</menu-select-options>
 		</menu-select>
-		<input id="symbolCompareInput" placeholder="Add Comparison" type="text" [(ngModel)]="symbolComparison"><button class="ciq comparison-btn" (click)="addComparison()"></button>
+		<menu-select class="ciq" id="studySelect">
+			<span class="title">{{studies.selectedOption || "Add Study"}}</span>
+			<menu-select-options>
+				<menu-option *ngFor="#study of studies.list" (click)="studyDialog.addStudy(study, chartComponent.ciq)">
+					{{study}}
+				</menu-option>
+			</menu-select-options>
+		</menu-select>
 		<button class="ciq crosshair-btn" (click)="toggleCrosshairs()">Crosshairs</button>
+		<menu-select class="ciq" id="themeSelect">
+			<span class="title">Select Theme</span>
+			<menu-select-options class="menu-hover">
+				<menu-option *ngFor="#theme of themes" (click)="handleThemeSelect(theme)"><span>{{theme.name}}</span></menu-option>
+			</menu-select-options>
+		</menu-select>
+		<button class="ciq timezone-btn" (click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)">Select Timezone</button>
+		<input id="symbolCompareInput" placeholder="Add Comparison" type="text" [(ngModel)]="symbolComparison"><button class="ciq comparison-btn" (click)="addComparison()"></button>
 	</div>
 </nav>
 <!-- The components -->
-<chart #chartComponent></chart>
+<div class="ciq-chart-area">
+	<chart #chartComponent></chart>
+</div>
+
+<div class="ciq-footer">
+	<!--<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(1, 'all', 'month')">All</div>
+	<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(5, 'year', 'week')">5y</div>
+	<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(1, 'year')">1y</div>
+	<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(1, 'YTD')">YTD</div>
+	<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(3, 'month')">3m</div>
+	<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(1, 'month', 30)">1m</div>
+	<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(5, 'day', 30)">5d</div>
+	<div class="quick-link" ng-click="cqNgUi.cqNgChart.set(1, 'today')">1d</div>-->
+</div>
+
 <study-dialog #studyDialog [(launchDialog)]="launchDialog" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></study-dialog>
 <theme-dialog #themeDialog (themeToPush)="updateThemeList($event)" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></theme-dialog>
 <timezone-dialog #timezoneDialog></timezone-dialog>

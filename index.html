@@ -12,8 +12,10 @@
 		<script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
 		<!-- The ChartIQ required CSS -->
-		<link rel="stylesheet" href="chartiq_library/css/stx-chart.css">
-		<link rel="stylesheet" href="app/css/CIQ_Seed.css">
+		<link rel="stylesheet" type="text/css" href="app/css/stylesheets/CIQ_Seed.css">
+		<link rel="stylesheet" type="text/css" href="app/css/stylesheets/CIQ_Demo.css">
+		<link rel="stylesheet" type="text/css" href="chartiq_library/css/stx-chart.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="chartiq_library/css/chartiq.css" media="screen"/> <!-- For the dark theme -->
 
 		<!-- Import our app -->
 		<script src='require.js'></script>
@@ -34,11 +36,7 @@
 	</head>
 
 	<!-- 3. Display the application -->
-	<body class="ciq">
-		<!--<header class="ciq">
-			<img src="img/CIQ_Logo.svg" class="ciq logo">
-			<span>Angular 2.0 Seed Project</span>
-		</header>-->
+	<body class="ciq-night">
 		<my-app>Loading...</my-app>
 	</body>
 
