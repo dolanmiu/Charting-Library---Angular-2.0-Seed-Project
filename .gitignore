@@ -1,14 +1,6 @@
 node_modules/
 chartiq_library/
 typings/
-app/colorpicker_component/*.js
-app/colorpicker_component/*.map
-app/pipes/*.js
-app/pipes/*.map
-app/study_dialog_component/*.js
-app/study_dialog_component/*.map
-app/theme_dialog_component/*.js
-app/theme_dialog_component/*.map
-app/timezone_dialog_component/*.js
-app/timezone_dialog_component/*.map
+app/**/*.js
+app/**/*.map
 *.log
