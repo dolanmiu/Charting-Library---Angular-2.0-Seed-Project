@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "lite-server",
+    "compile": "tsc",
     "compile_watch": "tsc -w",
     "postinstall": "typings install & tsc",
     "debug": "concurrent lite-server \"npm run compile_watch\""
