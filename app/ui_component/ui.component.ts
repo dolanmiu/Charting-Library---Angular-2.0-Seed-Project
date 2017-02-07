@@ -117,10 +117,10 @@ export class ChartUI implements AfterViewChecked {
 
 	themes:any=[{"name": "Default",
 		"settings": // the default theme settings
-			{"chart":{"Axis Text":{"color":"rgba(102,102,102,1)"},
-				"Background":{"color":"rgba(255,255,255,1)"},
-				"Grid Dividers":{"color":"rgba(204,204,204,1)"},
-				"Grid Lines":{"color":"rgba(239,239,239,1)"}},
+			{"chart":{"Axis Text":{"color":"rgba(186,189,192,1)"},
+				"Background":{"color":"rgba(28,42,53,1)"},
+				"Grid Dividers":{"color":"rgba(153,153,153,1)"},
+				"Grid Lines":{"color":"rgba(32,48,60,1)"}},
 				"chartTypes":{"Candle/Bar":{"down": {"border":"rgba(0,0,0,1)", "color":"rgba(184,44,12,1)", "wick":"rgba(0,0,0,1)"},
 					"up":{"border":"rgba(0,0,0,1)", "color":"rgba(140,193,118,1)", "wick":"rgba(0,0,0,1)"}},
 					"Line":{"color":"rgba(0,0,0,1)"},
