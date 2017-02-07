@@ -48,7 +48,7 @@ export class Colorpicker{
 		this.launch=true;
 	}
 
-	colorPickerColors = [
+	private colorPickerColors: string[] = [
 		"ffffff","ffd0cf","ffd9bb","fff56c","eaeba3","d3e8ae","adf3ec","ccdcfa","d9c3eb",
 		"efefef","eb8b87","ffb679","ffe252","e2e485","c5e093","9de3df","b1c9f8","c5a6e1",
 		"cccccc","e36460","ff9250","ffcd2b","dcdf67","b3d987","66cac4","97b8f7","b387d7",
@@ -58,8 +58,7 @@ export class Colorpicker{
 		"000000","5c1506","401a08","714114","333610","222f1d","00544f","1f2a3c","281a33"
 	];
 
-	createColorPicker(div, fc) {
-		var colors=this.colorPickerColors;
+	private createColorPicker(div, fc) {
 		CIQ.clearNode(div);
 		var ul=document.createElement("ul");
 		ul.style.margin='0';
@@ -68,17 +67,16 @@ export class Colorpicker{
 		ul.style.zoom='1';
 		div.appendChild(ul);
 		function clkFn(c){ return function(){ fc(c); return false;};}
-		for(var i=0;i<colors.length;i++){
-			var c=colors[i];
+		for (const currentColor of this.colorPickerColors) {
 			var li=document.createElement("li");
 			var a=document.createElement("a");
 			li.appendChild(a);
 			li.style.cssFloat='left';
 			li.style.margin='0 5px 5px 0';
 			a.href="#";
-			a.title=c;
-			a.style.background="#"+c;
-			a.innerHTML=c;
+			a.title=currentColor;
+			a.style.background="#"+currentColor;
+			a.innerHTML=currentColor;
 			a.style.display='block';
 			a.style.width='13px';
 			a.style.height='13px';
@@ -87,7 +85,7 @@ export class Colorpicker{
 			a.style.outline='0';
 			a.style.border='1px solid #aaa';
 			ul.appendChild(li);
-			a.onclick=clkFn(c);
+			a.onclick=clkFn(currentColor);
 		}
 	};
 }
