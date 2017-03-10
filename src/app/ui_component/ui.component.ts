@@ -60,7 +60,7 @@ export class ChartUI implements AfterViewChecked {
 	addComparison(){
 		if(this.symbolComparison) {
 			// Note that this color generator has a bias toward darker colors. Just needed a quick solution here.
-			function getRandomColor() {
+			var getRandomColor=function() {
 				let letters = '0123456789ABCDEF';
 				let color = '#';
 				for (var i = 0; i < 6; i++) {

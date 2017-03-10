@@ -28,11 +28,11 @@ export class StudyDialog{
 
 	addStudy(study,ciq){
 		var self=this;
-		function closure(fc){
+		var closure = function(fc){
 			return function(){
 				fc.apply(self, arguments);
 			};
-		}
+		};
 		ciq.callbacks.studyOverlayEdit=closure(this.removeStudy);
 		ciq.callbacks.studyPanelEdit=closure(this.showDialog);
 		CIQ.Studies.addStudy(ciq, study);
