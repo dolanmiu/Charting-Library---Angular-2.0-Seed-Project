@@ -5,7 +5,7 @@ declare var CIQ: any;
 
 @Component({
 	selector: 'study-dialog',
-	styleUrls:['../css/CIQ_Seed.css', '../css/CIQ_Demo.css'],
+	styleUrls:['../css/CIQ_Seed.css'],
 	templateUrl: './study.dialog.component.html',
 	providers:[FilterByPropertyPipe]
 })
@@ -21,6 +21,7 @@ export class StudyDialog{
 	activeOutput:any={};
 	@Output() launchDialog=new EventEmitter<any>();
 	@Output() launchColorpickerEvent=new EventEmitter<any>();
+	@Output() launchOverlayMenu=new EventEmitter<any>();
 
 	constructor(){
 		this.zone = new NgZone({enableLongStackTrace: false});
@@ -33,11 +34,15 @@ export class StudyDialog{
 				fc.apply(self, arguments);
 			};
 		};
-		ciq.callbacks.studyOverlayEdit=closure(this.removeStudy);
+		ciq.callbacks.studyOverlayEdit=closure(this.showMenu);
 		ciq.callbacks.studyPanelEdit=closure(this.showDialog);
 		CIQ.Studies.addStudy(ciq, study);
 	}
+  showMenu=function(){
+    this.launchOverlayMenu.emit({sd:arguments[0].sd, ciq:arguments[0].stx});
+  };
 	showDialog=function(params){
+	  console.log(params);
 		this.zone.run(()=>{
 			this.studyHelper=new CIQ.Studies.DialogHelper({sd:params.sd,stx:params.stx});
 			this.inputs=this.studyHelper.inputs;
@@ -80,6 +85,7 @@ export class StudyDialog{
 	}
 
 	removeStudy=function(args){
+	  console.log(args);
 		CIQ.Studies.removeStudy(args.stx,args.sd);
 	};
 

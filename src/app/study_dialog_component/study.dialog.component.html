@@ -1,5 +1,5 @@
-<div class="ciq dialog-overlay" id="studyDialog" *ngIf="launchDialog | async">
-	<div class="ciq dialog">
+<div class="dialog-overlay" id="studyDialog" *ngIf="launchDialog | async">
+	<div class="dialog">
 		<h3>{{studyName}}</h3>
 		<div id="inputs">
 			<div class="input dialog-item" *ngFor="let input of inputs | filterByPropertyPipe:{type: 'number'}">
@@ -23,18 +23,18 @@
 		</div>
 		<div id="outputs">
 			<div class="output dialog-item" *ngFor="let output of outputs">
-				<div *ngIf="output.color" style="background-color:{{output.color}}" class="color-picker-swatch output" (click)="launchColorpicker(output,$event)"></div>
+				<div *ngIf="output.color" [ngStyle]="{'background-color':output.color}" class="color-picker-swatch output" (click)="launchColorpicker(output,$event)"></div>
 				<span>{{output.heading}}</span>
 			</div>
 		</div>
 		<div id="parameters">
 			<div class="parameter dialog-item" *ngFor="let param of parameters">
-				<div *ngIf="param.color" style="background-color:{{param.color}}" class="color-picker-swatch param" (click)="launchColorpicker(param,$event)"></div>
+				<div *ngIf="param.color" [ngStyle]="{'background-color':param.color}" class="color-picker-swatch param" (click)="launchColorpicker(param,$event)"></div>
 				<input *ngIf="param.name=='studyOverZones'" type="checkbox" [(ngModel)]="param.value">
 				<input *ngIf="param.name=='studyOverBought' || param.name=='studyOverSold'" type="number" [(ngModel)]="param.value">
 				<span>{{param.heading}}</span>
 			</div>
 		</div>
-		<button class="pull-right ciq" (click)="updateStudy(inputs, outputs, parameters); closeMe();">Save</button>
+		<button class="pull-right" (click)="updateStudy(inputs, outputs, parameters); closeMe();">Save</button>
 	</div>
 </div>

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app',
-  templateUrl: './app.component.html',
+  selector: 'body',
+  template: '<chart-ui></chart-ui>',
 })
 export class AppComponent {
 }

@@ -4,14 +4,15 @@ import {StudyDialog} from '../study_dialog_component/study.dialog.component'
 import {ThemeDialog} from '../theme_dialog_component/theme.dialog.component'
 import {TimezoneDialog} from '../timezone_dialog_component/timezone.dialog.component'
 import {Colorpicker} from '../colorpicker_component/colorpicker'
+import {OverlayMenu} from '../overlay_menu_component/overlay.menu'
 
 declare var CIQ: any;
 
 @Component({
     selector: 'chart-ui',
-	  styleUrls:['../css/CIQ_Seed.css', '../css/CIQ_Demo.css'],
+	  styleUrls:['../css/CIQ_Seed.css'],
     templateUrl: './ui.component.html',
-	  providers:[ChartComponent, StudyDialog, ThemeDialog, TimezoneDialog, Colorpicker],
+	  providers:[ChartComponent, StudyDialog, ThemeDialog, TimezoneDialog, Colorpicker, OverlayMenu],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -67,12 +68,11 @@ export class ChartUI implements AfterViewChecked {
 					color += letters[Math.floor(Math.random() * 16)];
 				}
 				return color;
-			}
+			};
 			let newSeries=this.chartComponent.ciq.addSeries(this.symbolComparison, {
 				isComparison: true,
 				color: getRandomColor(),
 				data: {useDefaultQuoteFeed: true},
-				permanent:true
 			});
 			//update the comparison legend
 			this.chartComponent.chartSeries.push(newSeries);
@@ -105,26 +105,47 @@ export class ChartUI implements AfterViewChecked {
 				}
 			}
 			if(!duplicate) // if it's duplicate we are going to update that existing theme
-				this.themes.push(params);
+        this.themes.splice((this.themes.length-1), 0, params);
 		}
 		else console.error("Please name your custom theme.");
 	};
 
+	orderedStudies:any=Object.keys(CIQ.Studies.studyLibrary).sort(function(a, b) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    // must be equal
+    return 0;
+  });
+
 	studies:any={
-		list:Object.keys(CIQ.Studies.studyLibrary),
+		list:this.orderedStudies,
 		selectedOption:''
 	};
 
-	themes:any=[{"name": "Default",
-		"settings": // the default theme settings
-			{"chart":{"Axis Text":{"color":"rgba(102,102,102,1)"},
-				"Background":{"color":"rgba(255,255,255,1)"},
-				"Grid Dividers":{"color":"rgba(204,204,204,1)"},
-				"Grid Lines":{"color":"rgba(239,239,239,1)"}},
-				"chartTypes":{"Candle/Bar":{"down": {"border":"rgba(0,0,0,1)", "color":"rgba(184,44,12,1)", "wick":"rgba(0,0,0,1)"},
-					"up":{"border":"rgba(0,0,0,1)", "color":"rgba(140,193,118,1)", "wick":"rgba(0,0,0,1)"}},
-					"Line":{"color":"rgba(0,0,0,1)"},
-					"Mountain":{"color":"rgba(102,202,196,0.498039)"}}}},
+	themes:any=[{
+    "name": "Default",
+    "settings": // the default theme settings
+      {
+        "chart": {
+          "Axis Text": { "color": "rgba(197,199,201,1)" },
+          "Background": { "color": "rgba(28,42,53,1)" },
+          "Grid Dividers": { "color": "rgba(37,55,70,1)" },
+          "Grid Lines": { "color": "rgba(33,50,63,1)" }
+        },
+        "chartTypes": {
+          "Candle/Bar": {
+            "down": { "border": "rgba(227,70,33,1)", "color": "rgba(184,44,12,1)", "wick": "rgba(0,0,0,1)" },
+            "up": { "border": "rgba(184,222,168,1)", "color": "rgba(140,193,118,1)", "wick": "rgba(0,0,0,1)" }
+          },
+          "Line": { "color": "rgba(0,0,0,1)" },
+          "Mountain": { "color": "rgba(102,202,196,0.498039)" }
+        }
+      }
+  },
 		{"name":"+ New Theme"}];
 
     periodicityOptions: Array<any> = [

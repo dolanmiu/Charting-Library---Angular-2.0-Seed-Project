@@ -38,10 +38,11 @@ export class Colorpicker{
 
 	launchColorpicker(params){
 		this.createColorPicker(this.element.nativeElement.children.colorPicker.children[0], this.setColor(params.setting));
+
 		var clicked=params.swatch;
 
-		this.posLeft=(clicked.offsetLeft + 10) +"px";
-		this.posTop=(clicked.offsetTop - 650) + "px";
+		this.posLeft=(clicked.offsetLeft+"px");
+		this.posTop=(clicked.offsetTop-40+"px");
 
 		this.caller=clicked;
 		this.parent=params.swatch.parentNode.classList[0];

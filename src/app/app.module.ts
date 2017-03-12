@@ -1,6 +1,4 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { rootRouterConfig } from './app.routes';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +12,7 @@ import { FilterByPropertyPipe } from './pipes/property.filter.pipe';
 import { StudyDialog } from './study_dialog_component/study.dialog.component';
 import { ThemeDialog } from './theme_dialog_component/theme.dialog.component';
 import { TimezoneDialog } from './timezone_dialog_component/timezone.dialog.component';
+import { OverlayMenu } from './overlay_menu_component/overlay.menu'
 
 @NgModule({
   declarations: [
@@ -24,14 +23,14 @@ import { TimezoneDialog } from './timezone_dialog_component/timezone.dialog.comp
     FilterByPropertyPipe,
     StudyDialog,
     ThemeDialog,
-    TimezoneDialog
+    TimezoneDialog,
+    OverlayMenu
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
   providers: [
     ChartService
