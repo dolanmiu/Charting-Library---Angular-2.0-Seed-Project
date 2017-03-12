@@ -38,4 +38,14 @@ export class ChartComponent implements OnInit {
 	    }
 	    this.ciq.removeSeries(series.display, this.ciq.ciq);
     }
+
+  set(multiplier, span){
+    var params={
+      multiplier:multiplier,
+      span:span,
+    };
+    this.ciq.setSpan(params, function(){
+      console.log("span set");
+    });
+  };
 }
