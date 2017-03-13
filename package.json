@@ -8,6 +8,11 @@
     "server": "webpack-dev-server --inline --progress --port 3000 --content-base src",
     "start": "npm run server"
   },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=5.0.0",
+    "npm": ">=3.0.0"
+  },
   "license": "ISC",
   "dependencies": {
     "@angular/common": "~2.2.1",
