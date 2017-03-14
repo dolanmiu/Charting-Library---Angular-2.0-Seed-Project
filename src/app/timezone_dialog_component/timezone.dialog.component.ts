@@ -3,27 +3,27 @@ import {Component, Output, EventEmitter} from '@angular/core'
 declare var CIQ: any;
 
 @Component({
-	selector: 'timezone-dialog',
-	styleUrls:['../css/CIQ_Seed.css'],
-	templateUrl: './timezone.dialog.component.html',
+  selector: 'timezone-dialog',
+  styleUrls:['../css/CIQ_Seed.css'],
+  templateUrl: './timezone.dialog.component.html',
 })
 
 export class TimezoneDialog{
-	ciq:any;
-	timezoneMap:any;
-	timezones:any=[];
-	myZone:any;
-	@Output() launchDialog=new EventEmitter<any>();
+  ciq:any;
+  timezoneMap:any;
+  timezones:any=[];
+  myZone:any;
+  @Output() launchDialog=new EventEmitter<any>();
 
-	constructor(){
-		this.timezoneMap=CIQ.timeZoneMap;
+  constructor(){
+    this.timezoneMap=CIQ.timeZoneMap;
     this.myZone=true; //default behavior
-	}
+  }
 
-	launchTimezoneDialog(chart){
-		for(let i in this.timezoneMap){
-			this.timezones.push(this.timezoneMap[i]);
-		}
+  launchTimezoneDialog(chart){
+    for(let i in this.timezoneMap){
+      this.timezones.push(this.timezoneMap[i]);
+    }
     this.timezones.sort(function(a, b) {
       if (a < b) {
         return -1;
@@ -34,16 +34,16 @@ export class TimezoneDialog{
       // must be equal
       return 0;
     });
-		this.ciq=chart;
-		this.launchDialog.emit(true);
-	}
+    this.ciq=chart;
+    this.launchDialog.emit(true);
+  }
 
-	setTimezone(zone){
-		this.ciq.setTimeZone(this.ciq.dataZone, zone);
+  setTimezone(zone){
+    this.ciq.setTimeZone(this.ciq.dataZone, zone);
     this.myZone=false;
-		if(this.ciq.chart.symbol) this.ciq.draw();
-		this.launchDialog.emit(false);
-	};
+    if(this.ciq.chart.symbol) this.ciq.draw();
+    this.launchDialog.emit(false);
+  };
 
   setMyTimezone(){
     this.ciq.defaultDisplayTimeZone=null;
@@ -59,7 +59,7 @@ export class TimezoneDialog{
     this.closeMe();
   };
 
-	closeMe=function(){
-		this.launchDialog.emit(false);
-	};
+  closeMe=function(){
+    this.launchDialog.emit(false);
+  };
 }

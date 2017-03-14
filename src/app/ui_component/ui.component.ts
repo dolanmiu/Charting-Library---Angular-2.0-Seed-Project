@@ -10,10 +10,10 @@ declare var CIQ: any;
 
 @Component({
     selector: 'chart-ui',
-	  styleUrls:['../css/CIQ_Seed.css'],
+    styleUrls:['../css/CIQ_Seed.css'],
     templateUrl: './ui.component.html',
-	  providers:[ChartComponent, StudyDialog, ThemeDialog, TimezoneDialog, Colorpicker, OverlayMenu],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+    providers:[ChartComponent, StudyDialog, ThemeDialog, TimezoneDialog, Colorpicker, OverlayMenu],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ChartUI implements AfterViewChecked {
@@ -25,92 +25,92 @@ export class ChartUI implements AfterViewChecked {
   chartType:string;
   symbolComparison:string;
 
-	constructor(private zone: NgZone){
-		this.periodicity="5 min";
-		this.chartType="candle";
-	}
-	ngAfterViewChecked(){
-		this.chartLayout=this.getChartLayout();
-	}
-	changeSymbol() {
-		this.chartComponent.ciq.newChart(this.symbolInput, this.chartComponent.sampleData);
-		this.symbolInput='';
-	}
-	changePeriodicity(period, interval){
-		this.chartComponent.ciq.setPeriodicityV2(period,interval);
-		for(let i in this.periodicityOptions){
-			if(this.periodicityOptions[i].interval==this.chartLayout.interval && this.periodicityOptions[i].period==this.chartLayout.periodicity){
-				this.zone.run(()=>{this.periodicity=this.periodicityOptions[i].label;});
-			}
-		}
-	}
-	changeChartType(type){
-		if((type.aggregationEdit && this.chartComponent.ciq.layout.aggregationType != type.type) || type.type == 'heikinashi'){
-			//ctrl.ciq.setChartType('candle');  This might make this chart type more useful for the end user
-			this.chartComponent.ciq.setAggregationType(type.type);
-		} else {
-			this.chartComponent.ciq.setChartType(type.type);
-		}
-		//update the ui
-		this.chartType=type.label;
-	}
-	toggleCrosshairs(){
-		let state=this.chartComponent.ciq.layout.crosshair;
-		this.chartComponent.ciq.layout.crosshair=!state;
-	}
-	addComparison(){
-		if(this.symbolComparison) {
-			// Note that this color generator has a bias toward darker colors. Just needed a quick solution here.
-			var getRandomColor=function() {
-				let letters = '0123456789ABCDEF';
-				let color = '#';
-				for (var i = 0; i < 6; i++) {
-					color += letters[Math.floor(Math.random() * 16)];
-				}
-				return color;
-			};
-			let newSeries=this.chartComponent.ciq.addSeries(this.symbolComparison, {
-				isComparison: true,
-				color: getRandomColor(),
-				data: {useDefaultQuoteFeed: true},
-			});
-			//update the comparison legend
-			this.chartComponent.chartSeries.push(newSeries);
-			this.symbolComparison=null;
-		}
-		else{
-			console.log("Error: no symbol for comparison entered");
-		}
-	}
-	getChartLayout(){
-		return this.chartComponent.getLayout();
-	}
+  constructor(private zone: NgZone){
+    this.periodicity="5 min";
+    this.chartType="candle";
+  }
+  ngAfterViewChecked(){
+    this.chartLayout=this.getChartLayout();
+  }
+  changeSymbol() {
+    this.chartComponent.ciq.newChart(this.symbolInput, this.chartComponent.sampleData);
+    this.symbolInput='';
+  }
+  changePeriodicity(period, interval){
+    this.chartComponent.ciq.setPeriodicityV2(period,interval);
+    for(let i in this.periodicityOptions){
+      if(this.periodicityOptions[i].interval==this.chartLayout.interval && this.periodicityOptions[i].period==this.chartLayout.periodicity){
+        this.zone.run(()=>{this.periodicity=this.periodicityOptions[i].label;});
+      }
+    }
+  }
+  changeChartType(type){
+    if((type.aggregationEdit && this.chartComponent.ciq.layout.aggregationType != type.type) || type.type == 'heikinashi'){
+      //ctrl.ciq.setChartType('candle');  This might make this chart type more useful for the end user
+      this.chartComponent.ciq.setAggregationType(type.type);
+    } else {
+      this.chartComponent.ciq.setChartType(type.type);
+    }
+    //update the ui
+    this.chartType=type.label;
+  }
+  toggleCrosshairs(){
+    let state=this.chartComponent.ciq.layout.crosshair;
+    this.chartComponent.ciq.layout.crosshair=!state;
+  }
+  addComparison(){
+    if(this.symbolComparison) {
+      // Note that this color generator has a bias toward darker colors. Just needed a quick solution here.
+      var getRandomColor=function() {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
+      let newSeries=this.chartComponent.ciq.addSeries(this.symbolComparison, {
+        isComparison: true,
+        color: getRandomColor(),
+        data: {useDefaultQuoteFeed: true},
+      });
+      //update the comparison legend
+      this.chartComponent.chartSeries.push(newSeries);
+      this.symbolComparison=null;
+    }
+    else{
+      console.log("Error: no symbol for comparison entered");
+    }
+  }
+  getChartLayout(){
+    return this.chartComponent.getLayout();
+  }
 
-	handleThemeSelect(theme){
-		if(theme.name=="+ New Theme"){
-			this.themeDialog.showDialog(this.chartComponent.ciq);
-		}
-		else{
-			this.themeDialog.updateTheme(theme);
-		}
-	}
+  handleThemeSelect(theme){
+    if(theme.name=="+ New Theme"){
+      this.themeDialog.showDialog(this.chartComponent.ciq);
+    }
+    else{
+      this.themeDialog.updateTheme(theme);
+    }
+  }
 
-	updateThemeList(params){
-		if(params.name){ // we aren't going to allow unnamed themes to be created
-			var duplicate=false;
-			for(var i=0; i<this.themes.length; i++){
-				if(this.themes[i].name==params.name) {
-					this.themes[i].settings = params.settings;
-					duplicate=true;
-				}
-			}
-			if(!duplicate) // if it's duplicate we are going to update that existing theme
+  updateThemeList(params){
+    if(params.name){ // we aren't going to allow unnamed themes to be created
+      var duplicate=false;
+      for(var i=0; i<this.themes.length; i++){
+        if(this.themes[i].name==params.name) {
+          this.themes[i].settings = params.settings;
+          duplicate=true;
+        }
+      }
+      if(!duplicate) // if it's duplicate we are going to update that existing theme
         this.themes.splice((this.themes.length-1), 0, params);
-		}
-		else console.error("Please name your custom theme.");
-	};
+    }
+    else console.error("Please name your custom theme.");
+  };
 
-	orderedStudies:any=Object.keys(CIQ.Studies.studyLibrary).sort(function(a, b) {
+  orderedStudies:any=Object.keys(CIQ.Studies.studyLibrary).sort(function(a, b) {
     if (a < b) {
       return -1;
     }
@@ -121,12 +121,12 @@ export class ChartUI implements AfterViewChecked {
     return 0;
   });
 
-	studies:any={
-		list:this.orderedStudies,
-		selectedOption:''
-	};
+  studies:any={
+    list:this.orderedStudies,
+    selectedOption:''
+  };
 
-	themes:any=[{
+  themes:any=[{
     "name": "Default",
     "settings": // the default theme settings
       {
@@ -146,193 +146,193 @@ export class ChartUI implements AfterViewChecked {
         }
       }
   },
-		{"name":"+ New Theme"}];
+    {"name":"+ New Theme"}];
 
     periodicityOptions: Array<any> = [
-			{
-				period: 1,
-				interval: 1,
-				label: '1 Min',
-			},
-			{
-				period: 1,
-				interval: 3,
-				label: '3 Min',
-			},
-			{
-				period: 1,
-				interval: 5,
-				label: '5 Min',
-			},
-			{
-				period: 1,
-				interval: 10,
-				label: '10 Min',
-			},
-			{
-				period: 3,
-				interval: 5,
-				label: '15 Min',
-			},
-			{
-				period: 1,
-				interval: 30,
-				label: '30 Min',
-			},
-			{
-				period: 2,
-				interval: 30,
-				label: '1 Hour',
-			},
-			{
-				period: 8,
-				interval: 30,
-				label: '4 Hour',
-			},
-			{
-				period: 1,
-				interval:'day',
-				label: '1 Day',
-			},
-			{
-				period: 2,
-				interval:'day',
-				label: '2 Day',
-			},
-			{
-				period: 3,
-				interval:'day',
-				label: '3 Day',
-			},
-			{
-				period: 5,
-				interval:'day',
-				label: '5 Day',
-			},
-			{
-				period: 10,
-				interval:'day',
-				label: '10 Day',
-			},
-			{
-				period: 20,
-				interval:'day',
-				label: '20 Day',
-			},
-			{
-				period: 1,
-				interval:'week',
-				label: '1 Wk',
-			},
-			{
-				period: 1,
-				interval:'month',
-				label: '1 Mon',
-			}
+      {
+        period: 1,
+        interval: 1,
+        label: '1 Min',
+      },
+      {
+        period: 1,
+        interval: 3,
+        label: '3 Min',
+      },
+      {
+        period: 1,
+        interval: 5,
+        label: '5 Min',
+      },
+      {
+        period: 1,
+        interval: 10,
+        label: '10 Min',
+      },
+      {
+        period: 3,
+        interval: 5,
+        label: '15 Min',
+      },
+      {
+        period: 1,
+        interval: 30,
+        label: '30 Min',
+      },
+      {
+        period: 2,
+        interval: 30,
+        label: '1 Hour',
+      },
+      {
+        period: 8,
+        interval: 30,
+        label: '4 Hour',
+      },
+      {
+        period: 1,
+        interval:'day',
+        label: '1 Day',
+      },
+      {
+        period: 2,
+        interval:'day',
+        label: '2 Day',
+      },
+      {
+        period: 3,
+        interval:'day',
+        label: '3 Day',
+      },
+      {
+        period: 5,
+        interval:'day',
+        label: '5 Day',
+      },
+      {
+        period: 10,
+        interval:'day',
+        label: '10 Day',
+      },
+      {
+        period: 20,
+        interval:'day',
+        label: '20 Day',
+      },
+      {
+        period: 1,
+        interval:'week',
+        label: '1 Wk',
+      },
+      {
+        period: 1,
+        interval:'month',
+        label: '1 Mon',
+      }
     ];
 
-	chartTypes: Array<any> = [
-			{
-				type: 'bar',
-				label: 'bar',
-			},
-			{
-				type: 'candle',
-				label: 'candle',
-			},
-			{
-				type: 'colored_bar',
-				label: 'colored bar',
-			},
-			{
-				type: 'hollow_candle',
-				label: 'hollow candle',
-			},
-			{
-				type: 'line',
-				label: 'line',
-			},
-			{
-				type: 'mountain',
-				label: 'mountain',
-			},
-			{
-				type: 'volume_candle',
-				label: 'volume candle',
-			},
-			{
-				type: 'heikinashi',
-				label: 'Heikin-Ashi',
-			},
-			{
-				type: 'kagi',
-				label: 'kagi',
-				aggregationEdit: {
-					title: 'Set Reversal Percentage',
-					inputs: [
-						{
-							lookup: 'kagi',
-							label: 'kagi',
-						}
-					]
-				}
-			},
-			{
-				type: 'linebreak',
-				label: 'line break',
-				aggregationEdit: {
-					title: 'Set Price Lines',
-					inputs: [
-						{
-							lookup: 'priceLines',
-							label: 'price line'
-						}
-					]
-				}
-			},
-			{
-				type: 'renko',
-				label: 'renko',
-				aggregationEdit: {
-					title: 'Set Range',
-					inputs: [
-						{
-							lookup: 'renko',
-							label: 'renko'
-						}
-					]
-				}
-			},
-			{
-				type: 'rangebars',
-				label: 'range bars',
-				aggregationEdit: {
-					title: 'Set Range',
-					inputs: [
-						{
-							lookup: 'range',
-							label: 'range'
-						}
-					]
-				}
-			},
-			{
-				type: 'pandf',
-				label: 'point & figure',
-				aggregationEdit: {
-					title: 'Set Point & Figure Parameters',
-					inputs: [
-						{
-							lookup: 'pandf.box',
-							label: 'box'
-						},
-						{
-							lookup: 'pandf.reversal',
-							label: 'reversal'
-						}
-					]
-				}
-			}
-		];
+  chartTypes: Array<any> = [
+      {
+        type: 'bar',
+        label: 'bar',
+      },
+      {
+        type: 'candle',
+        label: 'candle',
+      },
+      {
+        type: 'colored_bar',
+        label: 'colored bar',
+      },
+      {
+        type: 'hollow_candle',
+        label: 'hollow candle',
+      },
+      {
+        type: 'line',
+        label: 'line',
+      },
+      {
+        type: 'mountain',
+        label: 'mountain',
+      },
+      {
+        type: 'volume_candle',
+        label: 'volume candle',
+      },
+      {
+        type: 'heikinashi',
+        label: 'Heikin-Ashi',
+      },
+      {
+        type: 'kagi',
+        label: 'kagi',
+        aggregationEdit: {
+          title: 'Set Reversal Percentage',
+          inputs: [
+            {
+              lookup: 'kagi',
+              label: 'kagi',
+            }
+          ]
+        }
+      },
+      {
+        type: 'linebreak',
+        label: 'line break',
+        aggregationEdit: {
+          title: 'Set Price Lines',
+          inputs: [
+            {
+              lookup: 'priceLines',
+              label: 'price line'
+            }
+          ]
+        }
+      },
+      {
+        type: 'renko',
+        label: 'renko',
+        aggregationEdit: {
+          title: 'Set Range',
+          inputs: [
+            {
+              lookup: 'renko',
+              label: 'renko'
+            }
+          ]
+        }
+      },
+      {
+        type: 'rangebars',
+        label: 'range bars',
+        aggregationEdit: {
+          title: 'Set Range',
+          inputs: [
+            {
+              lookup: 'range',
+              label: 'range'
+            }
+          ]
+        }
+      },
+      {
+        type: 'pandf',
+        label: 'point & figure',
+        aggregationEdit: {
+          title: 'Set Point & Figure Parameters',
+          inputs: [
+            {
+              lookup: 'pandf.box',
+              label: 'box'
+            },
+            {
+              lookup: 'pandf.reversal',
+              label: 'reversal'
+            }
+          ]
+        }
+      }
+    ];
 
 }
