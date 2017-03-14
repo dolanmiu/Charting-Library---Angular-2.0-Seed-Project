@@ -21,3 +21,8 @@ A basic build of the ChartIQ library within the Angular 2.0 framework. This prov
 ## Questions and support
 
 If you have questions or get stuck using this project or the ChartIQ library, the dev support team can be reached through [dev@chartiq.com](mailto:dev@chartiq.com).
+
+## Contributing to this project
+
+If you wish to contribute to this project, fork it and send us a pull request.
+We'd love to see what it is you want to do with our charting tools!
