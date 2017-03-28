@@ -4,7 +4,6 @@
   "description": "A simple starter for ChartIQ in Angular2",
   "scripts": {
     "build": "webpack --progress",
-    "watch": "npm run build -- --watch",
     "server": "webpack-dev-server --inline --progress --port 3000 --content-base src",
     "start": "npm run server"
   },
