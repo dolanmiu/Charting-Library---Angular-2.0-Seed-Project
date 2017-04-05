@@ -12,7 +12,9 @@ import { FilterByPropertyPipe } from './pipes/property.filter.pipe';
 import { StudyDialog } from './study_dialog_component/study.dialog.component';
 import { ThemeDialog } from './theme_dialog_component/theme.dialog.component';
 import { TimezoneDialog } from './timezone_dialog_component/timezone.dialog.component';
-import { OverlayMenu } from './overlay_menu_component/overlay.menu'
+import { OverlayMenu } from './overlay_menu_component/overlay.menu';
+import { DrawingToolbar } from './drawing_toolbar_component/drawing.toolbar.component';
+import { TitlecasePipe } from './pipes/title.case.pipe'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { OverlayMenu } from './overlay_menu_component/overlay.menu'
     StudyDialog,
     ThemeDialog,
     TimezoneDialog,
-    OverlayMenu
+    OverlayMenu,
+    DrawingToolbar,
+    TitlecasePipe
   ],
   imports: [
     BrowserModule,

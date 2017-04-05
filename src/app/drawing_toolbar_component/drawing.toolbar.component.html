@@ -1,0 +1,8 @@
+<div class="toolbar" *ngIf="launchToolbar | async">
+	<menu-select id="toolSelect">
+		<span class="title">Select Tool</span>
+		<menu-select-options class="menu-hover">
+			<menu-option class="option" *ngFor="let tool of drawingTools"><span>{{tool | titlecase}}</span></menu-option>
+		</menu-select-options>
+	</menu-select>
+</div>

@@ -40,10 +40,12 @@
     </menu-select>
     <button class="crosshair-btn" (click)="toggleCrosshairs()"></button>
     <button class="timezone-btn" (click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)" ngClass="{'active':cqNgUi.cqNgChart.ciq.layout.crosshair}"></button>
+				<button class="drawing-toolbar-btn" (click)="drawingToolbar.toggleDrawingToolbar(chartComponent.ciq)"></button>
 	</div>
 </nav>
 <!-- The components -->
 <div class="ciq-chart-area">
+	<drawing-toolbar #drawingToolbar></drawing-toolbar>
   <chart #chartComponent></chart>
 </div>
 <div class="ciq-footer">
