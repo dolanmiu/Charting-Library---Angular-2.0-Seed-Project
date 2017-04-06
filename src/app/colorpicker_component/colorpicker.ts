@@ -16,6 +16,7 @@ export class Colorpicker{
   launch:any=false;
   @Output() setThemeSwatchColor:EventEmitter<any>=new EventEmitter();
   @Output() setStudySwatchColor:EventEmitter<any>=new EventEmitter();
+  @Output() setDrawingSwatchColor:EventEmitter<any>=new EventEmitter();
 
 
   constructor(public element:ElementRef){}
@@ -25,6 +26,8 @@ export class Colorpicker{
     return function() {
       if(that.parent=="output" || that.parent=="input" || that.parent=="parameter")
         that.setStudySwatchColor.emit({color:arguments[0], source:that.caller, params:params});
+      else if(that.parent=="drawingParameters")
+        that.setDrawingSwatchColor.emit({color:arguments[0], source:that.caller, params:params});
       else that.setThemeSwatchColor.emit({color:arguments[0], source:that.caller, params:params});
       that.closeMe();
     };

@@ -42,7 +42,6 @@ export class StudyDialog{
     this.launchOverlayMenu.emit({sd:arguments[0].sd, ciq:arguments[0].stx});
   };
   showDialog=function(params){
-    console.log(params);
     this.zone.run(()=>{
       this.studyHelper=new CIQ.Studies.DialogHelper({sd:params.sd,stx:params.stx});
       this.inputs=this.studyHelper.inputs;

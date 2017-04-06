@@ -46,7 +46,7 @@ export class ChartUI implements AfterViewChecked {
   }
   changeChartType(type){
     if((type.aggregationEdit && this.chartComponent.ciq.layout.aggregationType != type.type) || type.type == 'heikinashi'){
-      //ctrl.ciq.setChartType('candle');  This might make this chart type more useful for the end user
+      this.chartComponent.ciq.setChartType('candle');
       this.chartComponent.ciq.setAggregationType(type.type);
     } else {
       this.chartComponent.ciq.setChartType(type.type);

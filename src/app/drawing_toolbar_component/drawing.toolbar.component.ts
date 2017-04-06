@@ -1,4 +1,5 @@
 import {Component, Output, EventEmitter} from '@angular/core'
+import {TitlecasePipe} from '../pipes/title.case.pipe'
 
 declare var CIQ: any;
 
@@ -6,14 +7,24 @@ declare var CIQ: any;
   selector: 'drawing-toolbar',
   styleUrls:['../css/CIQ_Seed.css'],
   templateUrl: './drawing.toolbar.component.html',
+  providers:[TitlecasePipe]
 })
 
 export class DrawingToolbar{
   ciq:any;
+  activeOutput:any={};
   drawingToolsMap:any;
   drawingTools:any=[];
   open:boolean=false;
+  selectedTool:any;
+  toolParams:any;
+  fillColor:any;
+  lineColor:any;
+  lineWidth:any;
+  pattern:any;
+  selectedLineClass:any;
   @Output() launchToolbar=new EventEmitter<any>();
+  @Output() launchColorpickerEvent=new EventEmitter<any>();
 
   constructor(){
     this.drawingToolsMap=CIQ.Drawing.getDrawingToolList({});
@@ -37,10 +48,67 @@ export class DrawingToolbar{
     if(chart) this.ciq=chart;
     this.launchToolbar.emit(!this.open);
     this.open=!this.open;
+    if(!this.open){
+      this.selectedTool=false;
+      this.toolParams=false;
+      this.fillColor=false;
+      this.lineColor=false;
+      this.lineWidth=false;
+      this.pattern=false;
+      this.ciq.changeVectorType('');
+    }
+    var elem = document.getElementById("chartContainer");
+    if(this.open)
+      elem.className += " toolbarOn";
+    else elem.classList.remove("toolbarOn");
+    this.ciq.draw();
   }
 
   setTool(tool){
-
+    // Set all the info for the toolbar
+    this.selectedTool=TitlecasePipe.prototype.transform(tool);
+    this.toolParams = CIQ.Drawing.getDrawingParameters(this.ciq, tool);
+    this.fillColor=this.toolParams.fillColor;
+    if(this.toolParams.color=="auto") this.lineColor="white";
+    else this.lineColor=this.toolParams.color;
+    this.lineWidth=this.toolParams.lineWidth;
+    this.pattern=this.toolParams.pattern;
+    if(this.lineWidth && this.pattern)
+      this.selectedLineClass='ciq-solid-1';
+    // Activate the tool
+    this.ciq.changeVectorType(tool);
   };
+
+  launchColorpicker=function(setting, event){
+    this.activeOutput['div']=event.target;
+    this.launchColorpickerEvent.emit({
+      swatch: event.target,
+      setting:setting
+    });
+  };
+
+  setColorFromPicker(params){
+    if(this.activeOutput.div==params.source) {
+      this.updateToolColors(params.color, params.params);
+      this.activeOutput.div.style.backgroundColor=CIQ.hexToRgba('#'+params.color);
+    }
+  }
+
+  updateToolColors=function(color, settings){
+    if(settings=="drawingFill"){
+      this.ciq.currentVectorParameters.fillColor="#"+color;
+    }
+    else if(settings=="drawingLine"){
+      this.ciq.currentVectorParameters.currentColor="#"+color;
+    }
+  };
+
+  setLinePattern=function(newClass, newWeight, newPattern){
+    // Set the info for the toolbar menu
+    this.selectedLineClass=newClass;
+    // Activate the new parameters
+    this.ciq.currentVectorParameters.lineWidth=newWeight;
+    this.ciq.currentVectorParameters.pattern=newPattern;
+  }
 
 }

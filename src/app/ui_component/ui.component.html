@@ -40,12 +40,12 @@
     </menu-select>
     <button class="crosshair-btn" (click)="toggleCrosshairs()"></button>
     <button class="timezone-btn" (click)="timezoneDialog.launchTimezoneDialog(chartComponent.ciq)" ngClass="{'active':cqNgUi.cqNgChart.ciq.layout.crosshair}"></button>
-				<button class="drawing-toolbar-btn" (click)="drawingToolbar.toggleDrawingToolbar(chartComponent.ciq)"></button>
+		<button class="drawing-toolbar-btn" (click)="drawingToolbar.toggleDrawingToolbar(chartComponent.ciq)"></button>
 	</div>
 </nav>
 <!-- The components -->
 <div class="ciq-chart-area">
-	<drawing-toolbar #drawingToolbar></drawing-toolbar>
+	<drawing-toolbar #drawingToolbar (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></drawing-toolbar>
   <chart #chartComponent></chart>
 </div>
 <div class="ciq-footer">
@@ -61,5 +61,5 @@
 <study-dialog #studyDialog [(launchDialog)]="launchDialog" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)" (launchOverlayMenu)="overlayMenu.launchMe($event)"></study-dialog>
 <theme-dialog #themeDialog (themeToPush)="updateThemeList($event)" (launchColorpickerEvent)="colorpicker.launchColorpicker($event)"></theme-dialog>
 <timezone-dialog #timezoneDialog></timezone-dialog>
-<colorpicker #colorpicker (setThemeSwatchColor)="themeDialog.setColorFromPicker($event)" (setStudySwatchColor)="studyDialog.setColorFromPicker($event)"></colorpicker>
+<colorpicker #colorpicker (setDrawingSwatchColor)="drawingToolbar.setColorFromPicker($event)" (setThemeSwatchColor)="themeDialog.setColorFromPicker($event)" (setStudySwatchColor)="studyDialog.setColorFromPicker($event)"></colorpicker>
 <overlay-menu #overlayMenu (launchStudyDialog)="studyDialog.showDialog($event)" (removeStudy)="studyDialog.removeStudy($event)"></overlay-menu>
