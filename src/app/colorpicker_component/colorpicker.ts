@@ -42,7 +42,6 @@ export class Colorpicker{
   launchColorpicker(params){
     this.createColorPicker(this.element.nativeElement.children.colorPicker.children[0], this.setColor(params.setting));
     var clicked=params.swatch;
-    console.log(params);
     this.posLeft=(clicked.offsetLeft+"px");
     this.posTop=(clicked.offsetHeight+"px");
     this.caller=clicked;
