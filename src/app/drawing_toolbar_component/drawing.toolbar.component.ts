@@ -74,7 +74,7 @@ export class DrawingToolbar{
     this.lineWidth=this.toolParams.lineWidth;
     this.pattern=this.toolParams.pattern;
     if(this.lineWidth && this.pattern)
-      this.selectedLineClass='ciq-solid-1';
+      this.selectedLineClass='ciq-' + this.pattern + '-' + this.lineWidth;
     // Activate the tool
     this.ciq.changeVectorType(tool);
   };
@@ -96,19 +96,19 @@ export class DrawingToolbar{
 
   updateToolColors=function(color, settings){
     if(settings=="drawingFill"){
-      this.ciq.currentVectorParameters.fillColor="#"+color;
+      this.ciq.changeVectorParameter("fillColor", "#"+color);
     }
     else if(settings=="drawingLine"){
-      this.ciq.currentVectorParameters.currentColor="#"+color;
+      this.ciq.changeVectorParameter("currentColor", "#"+color);
     }
   };
 
-  setLinePattern=function(newClass, newWeight, newPattern){
+  setLinePattern=function(newClass, newWidth, newPattern){
     // Set the info for the toolbar menu
     this.selectedLineClass=newClass;
     // Activate the new parameters
-    this.ciq.currentVectorParameters.lineWidth=newWeight;
-    this.ciq.currentVectorParameters.pattern=newPattern;
+    this.ciq.changeVectorParameter("lineWidth", newWidth);
+    this.ciq.changeVectorParameter("pattern", newPattern);
   }
 
 }
