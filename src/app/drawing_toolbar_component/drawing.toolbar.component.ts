@@ -28,7 +28,6 @@ export class DrawingToolbar{
 
   constructor(){
     this.drawingToolsMap=CIQ.Drawing.getDrawingToolList({});
-    console.log(this.drawingToolsMap);
     //sort the tools
     for(let i in this.drawingToolsMap){
       this.drawingTools.push(this.drawingToolsMap[i]);
@@ -69,7 +68,6 @@ export class DrawingToolbar{
     // Set all the info for the toolbar
     this.selectedTool=TitlecasePipe.prototype.transform(tool);
     this.toolParams = CIQ.Drawing.getDrawingParameters(this.ciq, tool);
-    console.log(this.toolParams);
     this.fillColor=this.toolParams.fillColor;
     if(this.toolParams.color=="auto") this.lineColor="white";
     else this.lineColor=this.toolParams.color;

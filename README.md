@@ -6,7 +6,7 @@ A basic build of the ChartIQ library within the Angular 2.0 framework. This prov
 
 ## Requirements
 
-- A copy of the ChartIQ library. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
+- A copy of the ChartIQ library, version 3.0+ is required. To get your copy, visit https://www.chartiq.com/products/html5-charting-library/ to see a demo and get in touch with us.
 - [node.js](https://nodejs.org/) installed version 5+
 - NPM installed (version 3+) or [Yarn](https://yarnpkg.com/en/)
 

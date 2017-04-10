@@ -84,7 +84,6 @@ export class StudyDialog{
   }
 
   removeStudy=function(args){
-    console.log(args);
     CIQ.Studies.removeStudy(args.stx,args.sd);
   };
 
