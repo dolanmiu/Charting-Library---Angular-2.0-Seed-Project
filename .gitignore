@@ -1,3 +1,6 @@
+# Customer library files
+src/chartiq_library
+
 # Logs
 logs
 *.log
@@ -45,6 +48,9 @@ typings
 
 # VSCode
 .vscode
+
+# Yarn lock file (https://yarnpkg.com)
+yarn.lock
 
 # OS generated files
 .DS_Store

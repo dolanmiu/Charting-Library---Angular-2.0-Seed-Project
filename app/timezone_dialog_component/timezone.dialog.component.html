@@ -1,9 +1,0 @@
-<div class="ciq dialog-overlay" id="timezoneDialog" *ngIf="launchDialog | async">
-	<div class="dialog ciq">
-		<h3>Select Timezone</h3>
-		<ul class="ciq">
-			<li *ngFor="#zone of timezones" (click)="setTimezone(zone);">{{zone}}</li>
-		</ul>
-		<button class="ciq" (click)="closeMe();">Done</button>
-	</div>
-</div>
